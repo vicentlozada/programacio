@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import llibreries.JFrameConFondo;
 import main.Core;
@@ -72,10 +73,11 @@ public class ControladorFrmMenu implements ActionListener {
 
         frmMenu.setIconImage(imageicono);
         //Maximitza el formulari
-        //frmMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frmMenu.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         new ControladorInici(new FrmSignIn(), 0).iniciar(0);
         Upload.pintar_imatge(frmMenu.lblAvatar, 80, 80, SingletonInici.default_avatar);
+        Upload.pintar_imatge(frmMenu.lblLogo, 80, 80, SingletonInici.logo);
         frmMenu.lblUsuari.setText(SingletonInici.default_login);
         frmMenu.lblTipus.setText(SingletonInici.default_tipus);
 

@@ -506,22 +506,15 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
 
             // Finestra FrmInterfaceEF
             case _BTN_XML:
-
                 EFBLL.guardarArxiuXMLEFBLL();
-
                 break;
             case _BTN_JSON:
-
                 EFBLL.guardarArxiuJSONEFBLL();
-
                 break;
             case _BTN_TXT:
-
                 EFBLL.guardarArxiuTXTEFBLL();
-
                 break;
             case _BTN_AFEGIR:
-
                 selec = posicioAbsoluta();
                 if (selec == -1) {
                 } else {

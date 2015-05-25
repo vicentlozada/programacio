@@ -73,7 +73,7 @@ public class Upload {
                 }                
             }
         } else { //avatar anterior
-            ruta = SingletonUsuaris.us.getAvatar();
+            //ruta = SingletonUsuaris.us.getAvatar();
             ImageIcon icon = new ImageIcon(ruta);
             Image img = icon.getImage();
             Image newimg = img.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);

@@ -194,7 +194,7 @@ public class FrmUsuari extends javax.swing.JDialog {
 
         lbl_EMAIL.setText("e-mail:");
 
-        cmbTipusUsuari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "admin", "user" }));
+        cmbTipusUsuari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "user", "admin" }));
         cmbTipusUsuari.setToolTipText("Tipus d'usuari");
 
         lblcmbTipusUsuari.setText("Tipus d'usuari:");

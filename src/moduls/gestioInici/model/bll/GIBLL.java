@@ -128,7 +128,7 @@ public class GIBLL {
     public static boolean guardarGIBLL() {
         Connection conn = Connexio.connectar();
         if (conn != null) {
-            if (GUDAOBd.afegirUsuari(conn) == 1) {
+            if (GUDAOBd.insertUsuariDAOBd(conn) == 1) {
                 Connexio.desconnectar(conn);
                 return true;
             }
@@ -139,7 +139,7 @@ public class GIBLL {
     public static boolean modificarGIBLL() {
         Connection conn = Connexio.connectar();
         if (conn != null) {
-            if (GUDAOBd.modificarUsuari(conn) == 1) {
+            if (GUDAOBd.updateUsuariDAOBd(conn) == 1) {
                 Connexio.desconnectar(conn);
                 return true;
             }
@@ -173,20 +173,36 @@ public class GIBLL {
 
         if (validarEmailRecordarPass()) {
             String novaContrassenaya = Funcions.getCadenaAleatoria1(9);
-
             String Token = Funcions.getCadenaAleatoria3(24);
             String missatge = "Contrassenya: " + novaContrassenaya + "       " + "Token: " + Token;
             String passEncriptat = Encriptar.encriptarTokenMD5(novaContrassenaya);
             modificarPassBLL(passEncriptat);
-
+            /*
             new Thread(new Job(SingletonInici.user_mail, SingletonInici.pass_mail,
                     frmMail.txtEmail.getText(), SingletonInici.assumpte, missatge)).start();
             new Thread(new JcThread(frmMail.barProgressBar, 50)).start();
+            */
+            Menus.information(missatge, Token);
             return true;
         } else {
             Menus.warning("Correu electrònic no registrat!", "Recordar dades");
         }
         return false;
+    }
+
+    public static void enviarCorreuRegistreBLL() {
+        frmMail.btnEnviarCorreu.setEnabled(false);
+        char[] p = frmSignUp.txtPassword.getPassword();
+        String passText = new String(p);
+        String usuari = frmSignUp.txtUsuari.getText();
+        String Token = Funcions.getCadenaAleatoria3(24);
+        String missatge = "Usuari: " + usuari + "       " + "Contrassenya: " + passText + "       " + "Token: " + Token;
+        /*
+        new Thread(new Job(SingletonInici.user_mail, SingletonInici.pass_mail,
+                frmSignUp.txtEmail.getText(), SingletonInici.assumpte, missatge)).start();
+        new Thread(new JcThread(frmMail.barProgressBar, 50)).start();
+        */
+        Menus.information(missatge, Token);
     }
 
     public static boolean modificarPassBLL(String pass) {
@@ -203,7 +219,7 @@ public class GIBLL {
     public static boolean modificarPass() {
         Connection conn = Connexio.connectar();
         if (conn != null) {
-            if (GUDAOBd.modificarUsuari(conn) == 1) {
+            if (GUDAOBd.updateUsuariDAOBd(conn) == 1) {
                 Connexio.desconnectar(conn);
                 return true;
             }

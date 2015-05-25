@@ -13,6 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import moduls.gestioInici.model.classes.SingletonInici;
 
 public class Mail {
 
@@ -80,7 +81,7 @@ public class Mail {
             //mimebodypart2.setFileName("anexo.txt");
 
             MimeBodyPart mimebodypart3 = new MimeBodyPart();
-            DataSource fds = new FileDataSource("src/images/catering.jpg");
+            DataSource fds = new FileDataSource(SingletonInici.igatge_mail);
             mimebodypart3.setDataHandler(new DataHandler(fds));//establece la imagen como un dato anexo
             mimebodypart3.setHeader("Content-ID", "<image>");//embebe la imagen en el cuerpo del mensaje
 

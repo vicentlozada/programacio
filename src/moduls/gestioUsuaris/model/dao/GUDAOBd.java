@@ -172,7 +172,7 @@ public class GUDAOBd {
         return false;
     }
 
-    public static int afegirUsuari(Connection conn) {
+    public static int insertUsuariDAOBd(Connection conn) {
         int resultat = 0;
         String query = ("INSERT INTO catering.usuari VALUES(?,?,?,?,?,?,?,?,?,?,?)");
         try {
@@ -188,7 +188,6 @@ public class GUDAOBd {
                 stmt.setString(9, SingletonUsuaris.us.getTipus());
                 stmt.setByte(10, SingletonUsuaris.us.getEstat());
                 stmt.setString(11, SingletonUsuaris.us.getAvatar());
-
                 resultat = stmt.executeUpdate();
                 if (resultat == 1) {
                     System.out.println("Usuari afegit correctament !!!");
@@ -197,16 +196,16 @@ public class GUDAOBd {
                 }
             }
         } catch (SQLException sqlex) {
-            System.out.println("Afegir Usuari:" + sqlex.getMessage());
+            System.out.println("Afegir Usuari111:" + sqlex.getMessage());
         } catch (Exception ex) {
-            System.out.println("Afegir Usuari:" + ex.getMessage());
+            System.out.println("Afegir Usuari222:" + ex.getMessage());
         } finally {
             Connexio.desconnectar(conn);
         }
         return resultat;
     }
 
-    public static int modificarUsuari(Connection conn) {
+    public static int updateUsuariDAOBd(Connection conn) {
         int resultat = 0;
         String login = SingletonUsuaris.us.getLogin();
         String password = SingletonUsuaris.us.getPassword();
@@ -382,4 +381,26 @@ public class GUDAOBd {
         }
     }
 
+    public static int eliminarUsuariDAOBd(String login, Connection conn) {
+        int reseliminar = 0;
+        String query = "DELETE FROM usuari WHERE login=?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, login);
+            reseliminar = stmt.executeUpdate();
+            if (reseliminar == 1) {
+                System.out.println("Dades eliminades correctament !!!");
+            } else {
+                System.out.println("No s'han eliminat les Dades");
+            }
+            stmt.close();
+        } catch (SQLException sqlex) {
+            System.out.println("Eliminar Dades:" + sqlex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Eliminar Dades:" + ex.getMessage());
+        } finally {
+            Connexio.desconnectar(conn);
+        }
+        return reseliminar;
+    }    
 }

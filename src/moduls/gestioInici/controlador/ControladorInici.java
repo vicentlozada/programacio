@@ -21,6 +21,7 @@ import javax.swing.JDialog;
 import moduls.gestioInici.vistes.FrmMail;
 import static moduls.gestioInici.controlador.ControladorInici.frmSignUp;
 import moduls.gestioInici.model.bll.GIBLL;
+import moduls.gestioInici.model.classes.SingletonInici;
 import static moduls.gestioMenu.controlador.ControladorFrmMenu.frmMenu;
 import static moduls.gestioInici.model.classes.SingletonInici.buit;
 import static moduls.gestioInici.model.classes.SingletonInici.imageicono;
@@ -70,7 +71,8 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
         _TXT_EMAIL_SignUp,
         _BTN_REGISTRE_SignUp,
         // frmMail
-        _BTN_ENVIAR_CORREU,
+        _BTN_ENVIAR_CORREU_RECORDAR,
+        _BTN_ENVIAR_CORREU_REGISTRE,
         _TXT_EMAIL
 
     }
@@ -83,6 +85,8 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
                 frmSignIn.setIconImage(imageicono);
                 frmSignIn.setLocationRelativeTo(null);
                 frmSignIn.setVisible(true);
+
+                Upload.pintar_imatge(frmSignIn.lblLogo, 80, 80, SingletonInici.logo);
 
                 frmSignIn.btnIniciSessio.setActionCommand("_BTN_INICI_SESSIO_SignIn");
                 frmSignIn.btnIniciSessio.setName("_BTN_INICI_SESSIO_SignIn");
@@ -159,8 +163,8 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
                 frmMail.setLocationRelativeTo(null);
                 frmMail.setVisible(true);
 
-                frmMail.btnEnviarCorreu.setActionCommand("_BTN_ENVIAR_CORREU");
-                frmMail.btnEnviarCorreu.setName("_BTN_ENVIAR_CORREU");
+                frmMail.btnEnviarCorreu.setActionCommand("_BTN_ENVIAR_CORREU_RECORDAR");
+                frmMail.btnEnviarCorreu.setName("_BTN_ENVIAR_CORREU_RECORDAR");
                 frmMail.btnEnviarCorreu.addActionListener(this);
 
                 frmMail.txtEmail.setActionCommand("_TXT_EMAIL");
@@ -173,7 +177,30 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
                     @Override
                     public void windowClosing(WindowEvent e) {
                         new ControladorInici(new FrmSignIn(), 0).iniciar(0);
+                        frmMail.dispose();                      
+                    }
+                });
+
+                break;
+            case 3:
+                frmMail.setTitle("Registre");
+                frmMail.setIconImage(imageicono);
+                frmMail.setLocationRelativeTo(null);
+                frmMail.setVisible(true);
+
+                frmMail.txtEmail.setVisible(false);
+                frmMail.lblEmail.setVisible(false);
+
+                frmMail.btnEnviarCorreu.setActionCommand("_BTN_ENVIAR_CORREU_REGISTRE");
+                frmMail.btnEnviarCorreu.setName("_BTN_ENVIAR_CORREU_REGISTRE");
+                frmMail.btnEnviarCorreu.addActionListener(this);
+
+                frmMail.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        new ControladorInici(new FrmSignIn(), 0).iniciar(0);
                         frmMail.dispose();
+                        frmSignUp.dispose();
                     }
                 });
 
@@ -201,7 +228,7 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
                     frmMenu.setEnabled(true);
                     frmSignIn.dispose();
                     Upload.pintar_imatge(frmMenu.lblAvatar, 80, 80, SingletonUsuaris.us2.getAvatar());
-                    
+
                     frmMenu.lblUsuari.setText(SingletonUsuaris.us2.getLogin());
                     frmMenu.lblTipus.setText(SingletonUsuaris.us2.getTipus());
 
@@ -225,9 +252,11 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
                 break;
             case _BTN_REGISTRE_SignUp:
                 if (GIBLL.guardar_1BLL()) {
-                    new ControladorInici(new FrmSignIn(), 0).iniciar(0);
-                    frmSignUp.dispose();
+                    new ControladorInici(new FrmMail(), 2).iniciar(3);
+                    frmSignUp.setEnabled(false);
+                    //new ControladorInici(new FrmSignIn(), 0).iniciar(0);
                 }
+
                 break;
 
             //  frmMail
@@ -235,8 +264,11 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
                 GIBLL.demanaEmail_3BLL();
                 break;
 
-            case _BTN_ENVIAR_CORREU:
+            case _BTN_ENVIAR_CORREU_RECORDAR:
                 GIBLL.enviarCorreuBLL();
+                break;
+            case _BTN_ENVIAR_CORREU_REGISTRE:
+                GIBLL.enviarCorreuRegistreBLL();
                 break;
         }
     }
