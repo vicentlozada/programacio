@@ -59,6 +59,7 @@ public class GIDAOBd {
         return false;
     }
 */
+    /*
     public static boolean cercarEmailDAO(String email, Connection conn) {
         String login, nom, avatar, tipus, password, dni;
         int edat;

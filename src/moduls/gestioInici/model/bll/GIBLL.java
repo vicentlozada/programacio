@@ -7,13 +7,10 @@ package moduls.gestioInici.model.bll;
 
 import classes.Connexio;
 import java.sql.Connection;
-import moduls.gestioInici.model.classes.Job;
-import moduls.gestioInici.model.classes.JcThread;
 import llibreries.Encriptar;
 import static moduls.gestioInici.controlador.ControladorInici.frmMail;
 import static moduls.gestioInici.controlador.ControladorInici.frmSignIn;
 import static moduls.gestioInici.controlador.ControladorInici.frmSignUp;
-import moduls.gestioInici.model.classes.SingletonInici;
 import moduls.gestioInici.model.dao.GIDAOBd;
 import moduls.gestioInici.model.dao.GIDAOGrafic;
 import static moduls.gestioInici.model.dao.GIDAOGrafic.demanaEmail_1DAO;
@@ -38,11 +35,12 @@ public class GIBLL {
         }
         return false;
     }
+    //-----------------------------------------------------------------------------
 
     public static boolean cercarEmailBLL(String email) {
         Connection conn = Connexio.connectar();
         if (conn != null) {
-            if (GIDAOBd.cercarEmailDAO(email, conn)) {
+            if (GUDAOBd.cercarEmailDAO(email, conn)) {
                 Connexio.desconnectar(conn);
                 return true;
             }
@@ -230,7 +228,8 @@ public class GIBLL {
     public static boolean iniciSessioBLL() {
         return GIDAOGrafic.iniciSessioDAO();
     }
-
+//----------------------------------------------------------------------------------------
+    
     public static boolean enviarCorreuBLL() {
         if (GIDAOGrafic.validarEmail_3DAO()) {
             if (cercarEmailBLL(frmMail.txtEmail.getText())) {

@@ -6,7 +6,6 @@ import moduls.gestioEmpleats.gestioEF.model.classes.SingletonEF;
 import moduls.gestioEmpleats.gestioEH.model.classes.ArraylistEH;
 import moduls.gestioEmpleats.gestioET.model.classes.ArraylistET;
 import main.Core;
-import moduls.gestioInici.model.classes.SingletonInici;
 import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
 import utils.Menus;
 import utils.Themes;
@@ -48,9 +47,7 @@ public class Configuracio {
                 System.exit(0);
             }
         } else {
-           // EFDAO.omplirArray(conn);
             Connexio.desconnectar(conn);
-           //Collections.sort(SingletonEF.efix, new OrdenaNom()); // ordenem pel nom
         }
         
     }

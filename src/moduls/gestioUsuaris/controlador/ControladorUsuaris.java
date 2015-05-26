@@ -5,7 +5,7 @@
  */
 package moduls.gestioUsuaris.controlador;
 
-import classes.Upload;
+import llibreries.Upload;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

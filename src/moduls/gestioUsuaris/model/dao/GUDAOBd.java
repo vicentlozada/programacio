@@ -174,7 +174,11 @@ public class GUDAOBd {
 
     public static int insertUsuariDAOBd(Connection conn) {
         int resultat = 0;
-        String query = ("INSERT INTO catering.usuari VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+        String query = ("INSERT INTO catering.usuari"
+                + "(nom, dni, datanaixement, edat, "
+                + "login,password, datalta, email, "
+                + "tipus, estat, avatar) "
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
         try {
             try (PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(query)) {
                 stmt.setString(1, SingletonUsuaris.us.getNom());
@@ -196,9 +200,9 @@ public class GUDAOBd {
                 }
             }
         } catch (SQLException sqlex) {
-            System.out.println("Afegir Usuari111:" + sqlex.getMessage());
+            System.out.println("Afegir Usuari:" + sqlex.getMessage());
         } catch (Exception ex) {
-            System.out.println("Afegir Usuari222:" + ex.getMessage());
+            System.out.println("Afegir Usuari:" + ex.getMessage());
         } finally {
             Connexio.desconnectar(conn);
         }
@@ -402,5 +406,5 @@ public class GUDAOBd {
             Connexio.desconnectar(conn);
         }
         return reseliminar;
-    }    
+    }
 }
