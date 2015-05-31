@@ -14,7 +14,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import moduls.gestioInici.model.classes.SingletonInici;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import utils.Funcions;
 import utils.Menus;
 
@@ -73,7 +73,7 @@ public class Upload {
                 }                
             }
         } else { //avatar anterior
-            //ruta = SingletonUsuaris.us.getAvatar();
+            //ruta = SingletonUsuari.us.getAvatar();
             ImageIcon icon = new ImageIcon(ruta);
             Image img = icon.getImage();
             Image newimg = img.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);

@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import moduls.gestioUsuaris.model.classes.Usuari;
 
 /**
@@ -42,7 +42,7 @@ public class GIDAOBd {
                     tipus = rs.getString("tipus");
                     estat = rs.getByte("estat");
                     avatar = rs.getString("avatar");
-                    SingletonUsuaris.us2 = new Usuari(nom, dni, datan, edat, login,
+                    SingletonUsuari.us2 = new Usuari(nom, dni, datan, edat, login,
                             password, datac, email, tipus, estat, avatar);
                     rs.close();
                     stmt.close();
@@ -76,7 +76,7 @@ public class GIDAOBd {
                     tipus = rs.getString("tipus");
                     dni = rs.getString("dni");
                     email = rs.getString("email");
-                    SingletonUsuaris.us = new Usuari(dni, login, email, tipus, avatar);
+                    SingletonUsuari.us = new Usuari(dni, login, email, tipus, avatar);
 
                     rs.close();
                     stmt.close();
@@ -98,17 +98,17 @@ public class GIDAOBd {
      String query = ("INSERT INTO catering.usuari VALUES(?,?,?,?,?,?,?,?,?,?,?)");
      try {
      try (PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(query)) {
-     stmt.setString(1, SingletonUsuaris.us.getNom());
-     stmt.setString(2, SingletonUsuaris.us.getDni());
-     stmt.setString(3, Data.datatoString2(SingletonUsuaris.us.getDatanaixement(), 0));
-     stmt.setInt(4, SingletonUsuaris.us.getEdat());
-     stmt.setString(5, SingletonUsuaris.us.getLogin());
-     stmt.setString(6, SingletonUsuaris.us.getPassword());
-     stmt.setString(7, Data.datatoString2(SingletonUsuaris.us.getDatalta(), 0));
-     stmt.setString(8, SingletonUsuaris.us.getEmail());
-     stmt.setString(9, SingletonUsuaris.us.getTipus());
-     stmt.setByte(10, SingletonUsuaris.us.getEstat());
-     stmt.setString(11, SingletonUsuaris.us.getAvatar());
+     stmt.setString(1, SingletonUsuari.us.getNom());
+     stmt.setString(2, SingletonUsuari.us.getDni());
+     stmt.setString(3, Data.datatoString2(SingletonUsuari.us.getDatanaixement(), 0));
+     stmt.setInt(4, SingletonUsuari.us.getEdat());
+     stmt.setString(5, SingletonUsuari.us.getLogin());
+     stmt.setString(6, SingletonUsuari.us.getPassword());
+     stmt.setString(7, Data.datatoString2(SingletonUsuari.us.getDatalta(), 0));
+     stmt.setString(8, SingletonUsuari.us.getEmail());
+     stmt.setString(9, SingletonUsuari.us.getTipus());
+     stmt.setByte(10, SingletonUsuari.us.getEstat());
+     stmt.setString(11, SingletonUsuari.us.getAvatar());
 
      resultat = stmt.executeUpdate();
      if (resultat == 1) {

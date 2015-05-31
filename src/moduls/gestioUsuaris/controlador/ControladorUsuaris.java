@@ -35,8 +35,8 @@ import static moduls.gestioInici.model.classes.SingletonInici.verd;
 import static moduls.gestioMenu.controlador.ControladorFrmMenu.frmMenu;
 import moduls.gestioUsuaris.model.bll.GUBLL;
 import moduls.gestioUsuaris.model.classes.SimpleTableModelUS;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
-import static moduls.gestioUsuaris.model.classes.SingletonUsuaris.usAl;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
+import static moduls.gestioUsuaris.model.classes.SingletonUsuari.usAl;
 import moduls.gestioUsuaris.model.classes.Usuari;
 import moduls.gestioUsuaris.pager.Pagina;
 import static moduls.gestioUsuaris.pager.Pagina.itemsPerPage;
@@ -213,7 +213,7 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                 frmUsuari.setVisible(true);
 
                 avatar_temp = SingletonInici.default_avatar;
-                SingletonUsuaris.us.setAvatar(avatar_temp);
+                SingletonUsuari.us.setAvatar(avatar_temp);
                 Upload.pintar_imatge(frmUsuari.lblAvatar, 80, 80, avatar_temp);
                 frmUsuari.lblTipus.setText(SingletonInici.default_tipus);
 
@@ -276,13 +276,13 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                 frmUsuari.setLocationRelativeTo(null);
                 frmUsuari.setVisible(true);
 
-                if (GUBLL.cercarUsuariBLL(SingletonUsuaris.us2.getLogin())) {
+                if (GUBLL.cercarUsuariBLL(SingletonUsuari.us2.getLogin())) {
                     GUBLL.omplirCampsMBLL();
                     frmUsuari.lblcmbTipusUsuari.setVisible(false);
                     frmUsuari.cmbTipusUsuari.setVisible(false);
 
-                    Upload.pintar_imatge(frmUsuari.lblAvatar, 80, 80, SingletonUsuaris.us.getAvatar());
-                    frmUsuari.lblTipus.setText(SingletonUsuaris.us2.getTipus());
+                    Upload.pintar_imatge(frmUsuari.lblAvatar, 80, 80, SingletonUsuari.us.getAvatar());
+                    frmUsuari.lblTipus.setText(SingletonUsuari.us2.getTipus());
 
                     frmUsuari.txtUsuari.setEnabled(false);
                 }
@@ -349,10 +349,10 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                 GUBLL.cercarUsuari();
                 GUBLL.omplirCampsMBLL();
 
-                avatar_temp = SingletonUsuaris.us.getAvatar();
+                avatar_temp = SingletonUsuari.us.getAvatar();
 
-                Upload.pintar_imatge(frmUsuari.lblAvatar, 80, 80, SingletonUsuaris.us.getAvatar());
-                frmUsuari.lblTipus.setText(SingletonUsuaris.us.getTipus());
+                Upload.pintar_imatge(frmUsuari.lblAvatar, 80, 80, SingletonUsuari.us.getAvatar());
+                frmUsuari.lblTipus.setText(SingletonUsuari.us.getTipus());
 
                 frmUsuari.txtUsuari.setEnabled(false);
 
@@ -562,7 +562,7 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                 if (selec == -1) {
                 } else {
                     String login = (String) frmPagerUsuari.taula.getModel().getValueAt(selec, 0);
-                    SingletonUsuaris.us = new Usuari(login);
+                    SingletonUsuari.us = new Usuari(login);
                     new ControladorUsuaris(new FrmUsuari(), 1).iniciar(3);
                     frmPagerUsuari.dispose();
                 }
@@ -581,7 +581,7 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                 if (selec == -1) {
                 } else {
                     String login = (String) frmPagerUsuari.taula.getModel().getValueAt(selec, 0);
-                    SingletonUsuaris.us = new Usuari(login);
+                    SingletonUsuari.us = new Usuari(login);
                     if (GUBLL.eliminarUS()) {
                         frmPagerUsuari.txtFiltre.setText(null);
                     }
@@ -592,12 +592,12 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
             case _LBL_AVATAR_DEFAULT:
                 String ruta_avatar = (Upload.pintar_guardar_imag(frmUsuari.lblAvatar, 80, 80,
                         SingletonInici.default_avatar));
-                SingletonUsuaris.us.setAvatar(ruta_avatar);
+                SingletonUsuari.us.setAvatar(ruta_avatar);
                 break;
             case _LBL_AVATAR:
                 ruta_avatar = (Upload.pintar_guardar_imag(frmUsuari.lblAvatar, 80, 80,
-                        SingletonUsuaris.us.getAvatar()));
-                SingletonUsuaris.us.setAvatar(ruta_avatar);
+                        SingletonUsuari.us.getAvatar()));
+                SingletonUsuari.us.setAvatar(ruta_avatar);
                 break;
         }
     }

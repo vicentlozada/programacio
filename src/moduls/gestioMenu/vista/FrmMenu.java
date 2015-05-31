@@ -25,7 +25,6 @@ public class FrmMenu extends JFrameConFondo {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem7 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         lblAvatar = new javax.swing.JLabel();
         lblUsuari = new javax.swing.JLabel();
@@ -40,10 +39,12 @@ public class FrmMenu extends JFrameConFondo {
         mFiSessio = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mEixir = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        mEmpleats = new javax.swing.JMenu();
         mEmpleatFix = new javax.swing.JMenuItem();
         mEmpleatTemporal = new javax.swing.JMenuItem();
         mEmpleatHores = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        mEvent = new javax.swing.JMenuItem();
         mConfiguracions = new javax.swing.JMenu();
         mConfigGeneral = new javax.swing.JMenuItem();
         mApariencia = new javax.swing.JMenu();
@@ -51,8 +52,6 @@ public class FrmMenu extends JFrameConFondo {
         mMetal = new javax.swing.JMenuItem();
         mWindows = new javax.swing.JMenuItem();
         mUsuari = new javax.swing.JMenuItem();
-
-        jMenuItem7.setText("jMenuItem7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,7 +145,7 @@ public class FrmMenu extends JFrameConFondo {
 
         mMenuppal.add(mArxiu);
 
-        jMenu3.setText("Empleats");
+        mEmpleats.setText("Empleats");
 
         mEmpleatFix.setText("Empleat Fix");
         mEmpleatFix.addActionListener(new java.awt.event.ActionListener() {
@@ -154,15 +153,22 @@ public class FrmMenu extends JFrameConFondo {
                 mEmpleatFixActionPerformed(evt);
             }
         });
-        jMenu3.add(mEmpleatFix);
+        mEmpleats.add(mEmpleatFix);
 
         mEmpleatTemporal.setText("Empleat Temporal");
-        jMenu3.add(mEmpleatTemporal);
+        mEmpleats.add(mEmpleatTemporal);
 
         mEmpleatHores.setText("Empleat Hores");
-        jMenu3.add(mEmpleatHores);
+        mEmpleats.add(mEmpleatHores);
 
-        mMenuppal.add(jMenu3);
+        mMenuppal.add(mEmpleats);
+
+        jMenu2.setText("Events");
+
+        mEvent.setText("Alta Events");
+        jMenu2.add(mEvent);
+
+        mMenuppal.add(jMenu2);
 
         mConfiguracions.setText("Configuracions");
         mConfiguracions.addActionListener(new java.awt.event.ActionListener() {
@@ -230,7 +236,7 @@ public class FrmMenu extends JFrameConFondo {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,8 +281,7 @@ public class FrmMenu extends JFrameConFondo {
     }//GEN-LAST:event_mGuardarEFActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -293,6 +298,8 @@ public class FrmMenu extends JFrameConFondo {
     public javax.swing.JMenuItem mEmpleatFix;
     private javax.swing.JMenuItem mEmpleatHores;
     private javax.swing.JMenuItem mEmpleatTemporal;
+    public javax.swing.JMenu mEmpleats;
+    public javax.swing.JMenuItem mEvent;
     public javax.swing.JMenuItem mFiSessio;
     private javax.swing.JMenu mGuardarArxius;
     public javax.swing.JMenuItem mGuardarEF;

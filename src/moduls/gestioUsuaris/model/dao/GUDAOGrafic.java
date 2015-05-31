@@ -16,7 +16,7 @@ import static moduls.gestioInici.model.classes.SingletonInici.cancel;
 import static moduls.gestioInici.model.classes.SingletonInici.ok;
 import static moduls.gestioUsuaris.controlador.ControladorUsuaris.frmUsuari;
 import moduls.gestioUsuaris.model.bll.GUBLL;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import moduls.gestioUsuaris.model.classes.Usuari;
 import utils.Funcions;
 import utils.Menus;
@@ -151,7 +151,7 @@ public class GUDAOGrafic {
         if (Validate.isValidFormatDNI(frmUsuari.txtDni.getText())) {
 
             if (GUBLL.cercarDniBLL(frmUsuari.txtDni.getText())) {
-                if (!frmUsuari.txtDni.getText().equals(SingletonUsuaris.us.getDni())) {
+                if (!frmUsuari.txtDni.getText().equals(SingletonUsuari.us.getDni())) {
                     frmUsuari.lblbDni.setIcon(cancel);
                     Menus.warning("DNI ja donat d'alta!", "Usuaris");
                     return false;
@@ -172,7 +172,7 @@ public class GUDAOGrafic {
         boolean val1 = false, val2 = false, val3 = false;
         int edat = 0;
         byte estat = 0;
-        String tipus = SingletonUsuaris.us2.getTipus(), avatar = SingletonUsuaris.us.getAvatar();
+        String tipus = SingletonUsuari.us2.getTipus(), avatar = SingletonUsuari.us.getAvatar();
         Data datanaixement = null;
         Data datalta = null;
 
@@ -326,7 +326,7 @@ public class GUDAOGrafic {
 
                 if ((val1) && (val2) && (val3)) {
                     if (Menus.confirmar("Guardar les dades?", "Guardar")) {
-                        SingletonUsuaris.us = new Usuari(nom, dni, datanaixement,
+                        SingletonUsuari.us = new Usuari(nom, dni, datanaixement,
                                 edat, login, password, datalta, email, tipus, estat, avatar);
                         return true;
                     }
@@ -339,11 +339,11 @@ public class GUDAOGrafic {
     public static boolean modificarUsuariDAOGrafic() {
         boolean val1 = false, val2 = false, val3 = false;
 
-        int edat = SingletonUsuaris.us.getEdat();
-        Data datalta = SingletonUsuaris.us.getDatalta();
-        byte estat = SingletonUsuaris.us.getEstat();
-        String avatar = SingletonUsuaris.us.getAvatar();
-        String tipus = SingletonUsuaris.us.getTipus();
+        int edat = SingletonUsuari.us.getEdat();
+        Data datalta = SingletonUsuari.us.getDatalta();
+        byte estat = SingletonUsuari.us.getEstat();
+        String avatar = SingletonUsuari.us.getAvatar();
+        String tipus = SingletonUsuari.us.getTipus();
 
         Data datanaixement = null;
         String password = null;
@@ -364,7 +364,7 @@ public class GUDAOGrafic {
             frmUsuari.lblbDnaixement.setIcon(cancel);
         }
 
-        if ("admin".equals(SingletonUsuaris.us2.getTipus())) {
+        if ("admin".equals(SingletonUsuari.us2.getTipus())) {
             tipus = frmUsuari.cmbTipusUsuari.getSelectedItem().toString();
         }
 
@@ -383,7 +383,7 @@ public class GUDAOGrafic {
 
         String passText = new String(p);
         if ("1234567a".equals(passText)) {
-            password = SingletonUsuaris.us.getPassword();
+            password = SingletonUsuari.us.getPassword();
         } else {
             password = Encriptar.encriptarTokenMD5(passText);
         }
@@ -490,7 +490,7 @@ public class GUDAOGrafic {
             if ((dni != null) && (login != null) && (email != null)) {
 
                 if (GUBLL.cercarDniBLL(dni)) {
-                    if (!dni.equals(SingletonUsuaris.us.getDni())) {
+                    if (!dni.equals(SingletonUsuari.us.getDni())) {
                         frmUsuari.lblbDni.setIcon(cancel);
                         Menus.warning("DNI ja donat d'alta!", "Usuaris");
                         val1 = false;
@@ -502,7 +502,7 @@ public class GUDAOGrafic {
                 }
 
                 if (GUBLL.cercarUsuariBLL(login)) {
-                    if (!login.equals(SingletonUsuaris.us.getLogin())) {
+                    if (!login.equals(SingletonUsuari.us.getLogin())) {
                         frmUsuari.lblbUsuari.setIcon(cancel);
                         Menus.warning("Usuari ja donat d'alta!", "Usuaris");
                         val2 = false;
@@ -514,7 +514,7 @@ public class GUDAOGrafic {
                 }
 
                 if (GUBLL.cercarEmailBLL(email)) {
-                    if (!email.equals(SingletonUsuaris.us.getEmail())) {
+                    if (!email.equals(SingletonUsuari.us.getEmail())) {
                         frmUsuari.lblbEmail.setIcon(cancel);
                         Menus.warning("Email ja donat d'alta!", "Usuaris");
                         val3 = false;
@@ -527,7 +527,7 @@ public class GUDAOGrafic {
 
                 if ((val1) && (val2) && (val3)) {
                     if (Menus.confirmar("Guardar les dades?", "Guardar")) {
-                        SingletonUsuaris.us = new Usuari(nom, dni, datanaixement,
+                        SingletonUsuari.us = new Usuari(nom, dni, datanaixement,
                                 edat, login, password, datalta, email, tipus, estat, avatar);
                         return true;
                     }
@@ -540,8 +540,8 @@ public class GUDAOGrafic {
     public static boolean afegirUsuariDAOGrafic() {
         boolean val1 = false, val2 = false, val3 = false;
         int edat = 0;
-        byte estat = SingletonUsuaris.us2.getEstat();
-        String avatar = SingletonUsuaris.us.getAvatar();
+        byte estat = SingletonUsuari.us2.getEstat();
+        String avatar = SingletonUsuari.us.getAvatar();
         Data datanaixement = null;
         Data datalta = Data.datactual();
         String password = null;
@@ -650,7 +650,7 @@ public class GUDAOGrafic {
             if ((dni != null) && (login != null) && (email != null)) {
 
                 if (GUBLL.cercarDniBLL(dni)) {
-                    if (!dni.equals(SingletonUsuaris.us.getDni())) {
+                    if (!dni.equals(SingletonUsuari.us.getDni())) {
                         frmUsuari.lblbDni.setIcon(cancel);
                         Menus.warning("DNI ja donat d'alta!", "Usuaris");
                         val1 = false;
@@ -662,7 +662,7 @@ public class GUDAOGrafic {
                 }
 
                 if (GUBLL.cercarUsuariBLL(login)) {
-                    if (!login.equals(SingletonUsuaris.us.getLogin())) {
+                    if (!login.equals(SingletonUsuari.us.getLogin())) {
                         frmUsuari.lblbUsuari.setIcon(cancel);
                         Menus.warning("Usuari ja donat d'alta!", "Usuaris");
                         val2 = false;
@@ -674,7 +674,7 @@ public class GUDAOGrafic {
                 }
 
                 if (GUBLL.cercarEmailBLL(email)) {
-                    if (!email.equals(SingletonUsuaris.us.getEmail())) {
+                    if (!email.equals(SingletonUsuari.us.getEmail())) {
                         frmUsuari.lblbEmail.setIcon(cancel);
                         Menus.warning("Email ja donat d'alta!", "Usuaris");
                         val3 = false;
@@ -687,7 +687,7 @@ public class GUDAOGrafic {
 
                 if ((val1) && (val2) && (val3)) {
                     if (Menus.confirmar("Guardar les dades?", "Guardar")) {
-                        SingletonUsuaris.us = new Usuari(nom, dni, datanaixement,
+                        SingletonUsuari.us = new Usuari(nom, dni, datanaixement,
                                 edat, login, password, datalta, email, tipus, estat, avatar);
                         return true;
                     }
@@ -699,15 +699,15 @@ public class GUDAOGrafic {
 
     public static void omplirCampsMDAO() {
 
-        frmUsuari.txtUsuari.setText(SingletonUsuaris.us.getLogin());
+        frmUsuari.txtUsuari.setText(SingletonUsuari.us.getLogin());
         frmUsuari.txtPassword.setText("1234567a"); // pinta un pass sense encriptar
-        frmUsuari.txtDni.setText(SingletonUsuaris.us.getDni());
-        frmUsuari.txtNom.setText(SingletonUsuaris.us.getNom());
-        frmUsuari.txtEmail.setText(SingletonUsuaris.us.getEmail());
-        frmUsuari.DateDataNaixement.setDate(Data.datatodate(SingletonUsuaris.us.getDatanaixement()));
-        frmUsuari.cmbTipusUsuari.setSelectedItem(SingletonUsuaris.us.getTipus());
+        frmUsuari.txtDni.setText(SingletonUsuari.us.getDni());
+        frmUsuari.txtNom.setText(SingletonUsuari.us.getNom());
+        frmUsuari.txtEmail.setText(SingletonUsuari.us.getEmail());
+        frmUsuari.DateDataNaixement.setDate(Data.datatodate(SingletonUsuari.us.getDatanaixement()));
+        frmUsuari.cmbTipusUsuari.setSelectedItem(SingletonUsuari.us.getTipus());
 
-        frmUsuari.lblEdat.setText(Integer.toString(SingletonUsuaris.us.getEdat()));
+        frmUsuari.lblEdat.setText(Integer.toString(SingletonUsuari.us.getEdat()));
 
         frmUsuari.lblbUsuari.setIcon(buit);
         frmUsuari.lblbPassword.setIcon(buit);

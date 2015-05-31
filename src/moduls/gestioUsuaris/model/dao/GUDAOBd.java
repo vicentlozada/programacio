@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import llibreries.Encriptar;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import moduls.gestioUsuaris.model.classes.Usuari;
 
 /**
@@ -24,7 +24,7 @@ public class GUDAOBd {
     public static int activaUsuariDAO(byte estat, Connection conn) {
 
         int resultat = 0;
-        String login = SingletonUsuaris.us2.getLogin();
+        String login = SingletonUsuari.us2.getLogin();
 
         String query = ("UPDATE catering.usuari SET estat=? "
                 + " WHERE login=?");
@@ -96,7 +96,7 @@ public class GUDAOBd {
                     tipus = rs.getString("tipus");
                     estat = rs.getByte("estat");
                     avatar = rs.getString("avatar");
-                    SingletonUsuaris.us = new Usuari(nom, dni, datan, edat, login,
+                    SingletonUsuari.us = new Usuari(nom, dni, datan, edat, login,
                             password, datac, email, tipus, estat, avatar);
                     rs.close();
                     stmt.close();
@@ -154,7 +154,7 @@ public class GUDAOBd {
                         estat = rs.getByte("estat");
                         avatar = rs.getString("avatar");
 
-                        SingletonUsuaris.us2 = new Usuari(login, tipus, estat, avatar);
+                        SingletonUsuari.us2 = new Usuari(login, tipus, estat, avatar);
 
                         rs.close();
                         stmt.close();
@@ -176,22 +176,22 @@ public class GUDAOBd {
         int resultat = 0;
         String query = ("INSERT INTO catering.usuari"
                 + "(nom, dni, datanaixement, edat, "
-                + "login,password, datalta, email, "
+                + "login, password, datalta, email, "
                 + "tipus, estat, avatar) "
                 + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
         try {
             try (PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(query)) {
-                stmt.setString(1, SingletonUsuaris.us.getNom());
-                stmt.setString(2, SingletonUsuaris.us.getDni());
-                stmt.setString(3, Data.datatoString2(SingletonUsuaris.us.getDatanaixement(), 0));
-                stmt.setInt(4, SingletonUsuaris.us.getEdat());
-                stmt.setString(5, SingletonUsuaris.us.getLogin());
-                stmt.setString(6, SingletonUsuaris.us.getPassword());
-                stmt.setString(7, Data.datatoString2(SingletonUsuaris.us.getDatalta(), 0));
-                stmt.setString(8, SingletonUsuaris.us.getEmail());
-                stmt.setString(9, SingletonUsuaris.us.getTipus());
-                stmt.setByte(10, SingletonUsuaris.us.getEstat());
-                stmt.setString(11, SingletonUsuaris.us.getAvatar());
+                stmt.setString(1, SingletonUsuari.us.getNom());
+                stmt.setString(2, SingletonUsuari.us.getDni());
+                stmt.setString(3, Data.datatoString2(SingletonUsuari.us.getDatanaixement(), 0));
+                stmt.setInt(4, SingletonUsuari.us.getEdat());
+                stmt.setString(5, SingletonUsuari.us.getLogin());
+                stmt.setString(6, SingletonUsuari.us.getPassword());
+                stmt.setString(7, Data.datatoString2(SingletonUsuari.us.getDatalta(), 0));
+                stmt.setString(8, SingletonUsuari.us.getEmail());
+                stmt.setString(9, SingletonUsuari.us.getTipus());
+                stmt.setByte(10, SingletonUsuari.us.getEstat());
+                stmt.setString(11, SingletonUsuari.us.getAvatar());
                 resultat = stmt.executeUpdate();
                 if (resultat == 1) {
                     System.out.println("Usuari afegit correctament !!!");
@@ -211,16 +211,16 @@ public class GUDAOBd {
 
     public static int updateUsuariDAOBd(Connection conn) {
         int resultat = 0;
-        String login = SingletonUsuaris.us.getLogin();
-        String password = SingletonUsuaris.us.getPassword();
-        String dni = SingletonUsuaris.us.getDni();
-        String nom = SingletonUsuaris.us.getNom();
-        String datanaixement = Data.datatoString2(SingletonUsuaris.us.getDatanaixement(), 0);
-        int edat = SingletonUsuaris.us.getEdat();
-        String email = SingletonUsuaris.us.getEmail();
-        String tipus = SingletonUsuaris.us.getTipus();
-        byte estat = SingletonUsuaris.us.getEstat();
-        String avatar = SingletonUsuaris.us.getAvatar();
+        String login = SingletonUsuari.us.getLogin();
+        String password = SingletonUsuari.us.getPassword();
+        String dni = SingletonUsuari.us.getDni();
+        String nom = SingletonUsuari.us.getNom();
+        String datanaixement = Data.datatoString2(SingletonUsuari.us.getDatanaixement(), 0);
+        int edat = SingletonUsuari.us.getEdat();
+        String email = SingletonUsuari.us.getEmail();
+        String tipus = SingletonUsuari.us.getTipus();
+        byte estat = SingletonUsuari.us.getEstat();
+        String avatar = SingletonUsuari.us.getAvatar();
 
         String query = ("UPDATE catering.usuari SET password=?, dni=?, nom=?, email=?, "
                 + "datanaixement=?, edat=?, estat=?, tipus=?, avatar=?"
@@ -258,7 +258,7 @@ public class GUDAOBd {
     public static int modificarPassDAO(String password, Connection conn) {
         int resultat = 0;
 
-        String login = SingletonUsuaris.us.getLogin();
+        String login = SingletonUsuari.us.getLogin();
 
         String query = ("UPDATE catering.usuari SET password=? "
                 + " WHERE login=?");
@@ -300,7 +300,7 @@ public class GUDAOBd {
                     tipus = rs.getString("tipus");
                     dni = rs.getString("dni");
                     email = rs.getString("email");
-                    SingletonUsuaris.us = new Usuari(dni, login, email, tipus, avatar);
+                    SingletonUsuari.us = new Usuari(dni, login, email, tipus, avatar);
                     rs.close();
                     stmt.close();
                     return true;
@@ -332,7 +332,7 @@ public class GUDAOBd {
                     tipus = rs.getString("tipus");
                     dni = rs.getString("dni");
                     email = rs.getString("email");
-                    SingletonUsuaris.us = new Usuari(dni, login, email, tipus, avatar);
+                    SingletonUsuari.us = new Usuari(dni, login, email, tipus, avatar);
                     rs.close();
                     stmt.close();
                     return true;
@@ -371,7 +371,7 @@ public class GUDAOBd {
                     avatar = rs.getString("avatar");
                     Usuari u = new Usuari(nom, dni, datan, edat, login,
                             password, datac, email, tipus, estat, avatar);
-                    SingletonUsuaris.usAl.add(u);
+                    SingletonUsuari.usAl.add(u);
                 }
                 rs.close();
                 stmt.close();

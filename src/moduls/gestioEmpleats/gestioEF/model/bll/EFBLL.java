@@ -10,12 +10,6 @@ import moduls.gestioEmpleats.gestioEF.model.classes.EmpleatFix;
 import moduls.gestioEmpleats.gestioEF.model.dao.EFDAO.EFDAOBd;
 import moduls.gestioEmpleats.gestioEF.model.dao.EFDAO.EFDAOGrafic;
 import moduls.gestioEmpleats.gestioEF.model.dao.EFDAOFitxers.EFDAOFitxers;
-import static moduls.gestioEmpleats.gestioEF.model.dao.EFDAOFitxers.EFDAOFitxers.guardarArxiuEFDAO;
-import static moduls.gestioEmpleats.gestioEF.model.dao.EFDAOFitxers.EFDAOFitxers.guardarArxiuJSONEFDAO;
-import static moduls.gestioEmpleats.gestioEF.model.dao.EFDAOFitxers.EFDAOFitxers.guardarArxiuTXTEFDAO;
-import static moduls.gestioEmpleats.gestioEF.model.dao.EFDAOFitxers.EFDAOFitxers.guardarArxiuXMLEFDAO;
-import static moduls.gestioEmpleats.gestioEF.model.dao.EFDAOFitxers.EFDAOFitxers.obrirArxiuEFDAO;
-import utils.Validate;
 
 public class EFBLL {
 
@@ -203,7 +197,7 @@ public class EFBLL {
     public static int buscarDniEmpleat() {
         int pos = -1;
         for (int i = 0; i < SingletonEF.efix.size(); i++) {
-            if ((SingletonEF.efix.get(i)).equals(SingletonEF.ef)) {
+            if ((SingletonEF.efix.get(i)).equals(SingletonEF.ef2)) {
                 pos = i;
             }
         }

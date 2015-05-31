@@ -19,7 +19,7 @@ import static moduls.gestioInici.model.classes.SingletonInici.cancel;
 import static moduls.gestioInici.model.classes.SingletonInici.ok;
 import static moduls.gestioUsuaris.controlador.ControladorUsuaris.frmUsuari;
 import moduls.gestioUsuaris.model.bll.GUBLL;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import moduls.gestioUsuaris.model.classes.Usuari;
 import utils.Menus;
 import utils.Validate;
@@ -254,7 +254,7 @@ public class GIDAOGrafic {
 
                 if ((val1 == true) && (val2 == true)) {
                     if (Menus.confirmar("Registrar les dades?", "Registrar")) {
-                        SingletonUsuaris.us = new Usuari(nom, dni, datanaixement,
+                        SingletonUsuari.us = new Usuari(nom, dni, datanaixement,
                                 edat, login, password, datalta, email, tipus, estat, avatar);
                         return true;
                     }

@@ -19,6 +19,8 @@ import moduls.configuracio.vista.FrmConfig;
 import moduls.gestioEmpleats.gestioEF.controlador.ControladorEF;
 import moduls.gestioEmpleats.gestioEF.model.bll.EFBLL;
 import moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF;
+import moduls.gestioEvents.controlador.ControladorEvents;
+import moduls.gestioEvents.vista.FrmEvents;
 import moduls.gestioInici.model.classes.SingletonInici;
 import static moduls.gestioInici.model.classes.SingletonInici.imageicono;
 import moduls.gestioMenu.vista.FrmMenu;
@@ -26,7 +28,7 @@ import moduls.gestioInici.controlador.ControladorInici;
 import moduls.gestioInici.vistes.FrmSignIn;
 import moduls.gestioUsuaris.controlador.ControladorUsuaris;
 import moduls.gestioUsuaris.model.bll.GUBLL;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import moduls.gestioUsuaris.vista.FrmPagerUsuari;
 import moduls.gestioUsuaris.vista.FrmUsuari;
 import utils.Menus;
@@ -49,6 +51,7 @@ public class ControladorFrmMenu implements ActionListener {
 
         M_CONFIG_GENERAL,
         M_EIXIR,
+        M_EVENT,
         M_EMPLEAT_FIX,
         M_EMPLEAT_HORES,
         M_EMPLEAT_TEMPORAL,
@@ -88,6 +91,10 @@ public class ControladorFrmMenu implements ActionListener {
         frmMenu.mEixir.setActionCommand("M_EIXIR");
         frmMenu.mEixir.setName("M_EIXIR");
         frmMenu.mEixir.addActionListener(this);
+
+        frmMenu.mEvent.setActionCommand("M_EVENT");
+        frmMenu.mEvent.setName("M_EVENT");
+        frmMenu.mEvent.addActionListener(this);
 
         frmMenu.mGuardarEF.setActionCommand("M_GUARDAR_EF");
         frmMenu.mGuardarEF.setName("M_GUARDAR_EF");
@@ -138,21 +145,21 @@ public class ControladorFrmMenu implements ActionListener {
                 break;
             case M_FISESSIO:
                 if (Menus.confirmar("Tancar la sessió?", "Finalitzar sessió")) {
-                    if (SingletonUsuaris.us2.getEstat() == 1) {
+                    if (SingletonUsuari.us2.getEstat() == 1) {
                         byte estat = 0;
                         GUBLL.activaUsuariBLL(estat);
                     }
                     frmMenu.setEnabled(false);
-                    //SingletonUsuaris.us.setLogin("login");
-                    //SingletonUsuaris.us.setTipus("user");
-                    //SingletonUsuaris.us.setAvatar(SingletonInici.default_avatar);
                     new ControladorInici(new FrmSignIn(), 0).iniciar(0);
                     Upload.pintar_imatge(frmMenu.lblAvatar, 80, 80, SingletonInici.default_avatar);
                     frmMenu.lblUsuari.setText(SingletonInici.default_login);
                     frmMenu.lblTipus.setText(SingletonInici.default_tipus);
-
                 }
                 break;
+            case M_EVENT:
+                frmMenu.setEnabled(false);
+                new ControladorEvents(new FrmEvents(), 0).iniciar(0);
+                break;                
             case M_EMPLEAT_FIX:
                 frmMenu.setEnabled(false);
                 new ControladorEF(new FrmInterfaceEF(), 0).iniciar(0);
@@ -164,16 +171,16 @@ public class ControladorFrmMenu implements ActionListener {
             case M_USUARI:
                 frmMenu.setEnabled(false);
                 // si és admin obrirà un pager d'usuaris
-                
-                if ("admin".equals(SingletonUsuaris.us2.getTipus())) {                    
+
+                if ("admin".equals(SingletonUsuari.us2.getTipus())) {
                     new ControladorUsuaris(new FrmPagerUsuari(), 0).iniciar(0);
-                    
+
                 } else {
                     new ControladorUsuaris(new FrmUsuari(), 1).iniciar(2);
                 }
                 break;
-            case M_GUARDAR_EF:                
-                if ("admin".equals(SingletonUsuaris.us2.getTipus())) {
+            case M_GUARDAR_EF:
+                if ("admin".equals(SingletonUsuari.us2.getTipus())) {
                     EFBLL.guardarArxiuEFBLL();
                 }
                 break;
@@ -205,9 +212,9 @@ public class ControladorFrmMenu implements ActionListener {
     }
 
     private void eixir() {
-        if (SingletonUsuaris.us2.getEstat() == 1) {
+        if (SingletonUsuari.us2.getEstat() == 1) {
             byte estat = 0;
-            SingletonUsuaris.us2.setEstat(estat);
+            SingletonUsuari.us2.setEstat(estat);
             GUBLL.activaUsuariBLL(estat);
         }
         Menus.information("Eixint de l'aplicació", "Eixir");

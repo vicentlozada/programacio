@@ -29,7 +29,7 @@ import static moduls.gestioInici.model.classes.SingletonInici.verd;
 import moduls.gestioInici.vistes.FrmSignIn;
 import moduls.gestioInici.vistes.FrmSignUp;
 import moduls.gestioUsuaris.model.bll.GUBLL;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 
 /**
  *
@@ -52,7 +52,6 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
             case 2:
                 frmMail = (FrmMail) frm;
                 break;
-
         }
     }
 
@@ -177,7 +176,7 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
                     @Override
                     public void windowClosing(WindowEvent e) {
                         new ControladorInici(new FrmSignIn(), 0).iniciar(0);
-                        frmMail.dispose();                      
+                        frmMail.dispose();
                     }
                 });
 
@@ -222,15 +221,21 @@ public class ControladorInici implements ActionListener, KeyListener, MouseListe
             case _BTN_INICI_SESSIO_SignIn:
                 if (GIBLL.iniciSessioBLL()) {
                     byte estat = 1;
-                    SingletonUsuaris.us2.setEstat(estat);
+                    SingletonUsuari.us2.setEstat(estat);
                     GUBLL.activaUsuariBLL(estat);
-
+                    
+                    if (("admin".equals(SingletonUsuari.us2.getTipus()))) {
+                        frmMenu.mEmpleats.setVisible(true);
+                    }else{
+                        frmMenu.mEmpleats.setVisible(false);
+                    }
+                    
                     frmMenu.setEnabled(true);
                     frmSignIn.dispose();
-                    Upload.pintar_imatge(frmMenu.lblAvatar, 80, 80, SingletonUsuaris.us2.getAvatar());
+                    Upload.pintar_imatge(frmMenu.lblAvatar, 80, 80, SingletonUsuari.us2.getAvatar());
 
-                    frmMenu.lblUsuari.setText(SingletonUsuaris.us2.getLogin());
-                    frmMenu.lblTipus.setText(SingletonUsuaris.us2.getTipus());
+                    frmMenu.lblUsuari.setText(SingletonUsuari.us2.getLogin());
+                    frmMenu.lblTipus.setText(SingletonUsuari.us2.getTipus());
 
                 } else {
                     frmSignIn.txtUsuari.setText(null);

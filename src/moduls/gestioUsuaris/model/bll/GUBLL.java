@@ -11,7 +11,7 @@ import llibreries.Encriptar;
 import static moduls.gestioInici.controlador.ControladorInici.frmMail;
 import static moduls.gestioInici.controlador.ControladorInici.frmSignIn;
 import static moduls.gestioUsuaris.controlador.ControladorUsuaris.frmUsuari;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import moduls.gestioUsuaris.model.dao.GUDAOBd;
 import moduls.gestioUsuaris.model.dao.GUDAOGrafic;
 import utils.Funcions;
@@ -27,14 +27,14 @@ public class GUBLL {
     public static void cercarUsuari() {
         int pos = buscarLoginUsuari();
         if (pos != -1) {
-            SingletonUsuaris.us = SingletonUsuaris.usAl.get(pos);
+            SingletonUsuari.us = SingletonUsuari.usAl.get(pos);
         }
     }    
     
     public static int buscarLoginUsuari() {
         int pos = -1;
-        for (int i = 0; i < SingletonUsuaris.usAl.size(); i++) {
-            if ((SingletonUsuaris.usAl.get(i)).equals(SingletonUsuaris.us)) {
+        for (int i = 0; i < SingletonUsuari.usAl.size(); i++) {
+            if ((SingletonUsuari.usAl.get(i)).equals(SingletonUsuari.us)) {
                 pos = i;
             }
         }
@@ -178,14 +178,14 @@ public class GUBLL {
     public static boolean eliminarUS() {
         int pos = buscarLoginUsuari();
         String login;
-        Boolean correcte = Menus.confirmar("Eliminar\n" + SingletonUsuaris.usAl.get(pos).getNom() + "?", "Eliminar Usuari");
+        Boolean correcte = Menus.confirmar("Eliminar\n" + SingletonUsuari.usAl.get(pos).getNom() + "?", "Eliminar Usuari");
         if (correcte) {
-            SingletonUsuaris.us = SingletonUsuaris.usAl.get(pos);
-            login = SingletonUsuaris.usAl.get(pos).getLogin();
+            SingletonUsuari.us = SingletonUsuari.usAl.get(pos);
+            login = SingletonUsuari.usAl.get(pos).getLogin();
             Connection conn = Connexio.connectar();
             if (conn != null) {
                 if (GUDAOBd.eliminarUsuariDAOBd(login, conn) == 1) {
-                    SingletonUsuaris.usAl.remove(SingletonUsuaris.us);
+                    SingletonUsuari.usAl.remove(SingletonUsuari.us);
                     Connexio.desconnectar(conn);
                     return true;
                 }

@@ -47,7 +47,7 @@ import static moduls.gestioInici.model.classes.SingletonInici.eliminar2;
 import static moduls.gestioInici.model.classes.SingletonInici.imageicono;
 import static moduls.gestioInici.model.classes.SingletonInici.verd;
 import static moduls.gestioMenu.controlador.ControladorFrmMenu.frmMenu;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import utils.Format;
 
 /**
@@ -178,7 +178,7 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
 
                 frmIntEF.taula.addRowSelectionInterval(0, 0); // seleccionem la primera fila 
 
-                if ("user".equals(SingletonUsuaris.us2.getTipus())) {
+                if ("user".equals(SingletonUsuari.us2.getTipus())) {
                     frmIntEF.btnAfegir.setVisible(false);
                     frmIntEF.btnEliminar.setVisible(false);
                     frmIntEF.btnModificar.setVisible(true);
@@ -329,7 +329,7 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
 
                 frmModiEF.txtDni.setEditable(false);
 
-                if ("user".equals(SingletonUsuaris.us2.getTipus())) {
+                if ("user".equals(SingletonUsuari.us2.getTipus())) {
                     noEditables();
                 }
                 frmModiEF.lblAvatar.setName("_LBL_AVATAR2");
@@ -527,7 +527,7 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                 if (selec == -1) {
                 } else {
                     String dni = (String) frmIntEF.taula.getModel().getValueAt(selec, 0);
-                    SingletonEF.ef = new EmpleatFix(dni);
+                    SingletonEF.ef2 = new EmpleatFix(dni);
                     frmIntEF.setEnabled(false);
                     new ControladorEF(new FrmModiEF(), 2).iniciar(2);
                 }

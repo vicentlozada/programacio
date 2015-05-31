@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package moduls.gestioUsuaris.model.classes;
+package moduls.gestioTipusEvent.model.classes;
 
 import java.util.ArrayList;
 
@@ -11,8 +11,9 @@ import java.util.ArrayList;
  *
  * @author Vicent
  */
-public class SingletonUsuaris {
-    public static ArrayList<Usuari> usAl;
-    public static Usuari us;
-    public static Usuari us2;
+public class SingletonTipusEvent {
+
+    public static ArrayList<TipusEvent> tevntAl;
+    public static TipusEvent tevnt;
+
 }

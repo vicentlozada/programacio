@@ -6,7 +6,8 @@ import moduls.gestioEmpleats.gestioEF.model.classes.SingletonEF;
 import moduls.gestioEmpleats.gestioEH.model.classes.ArraylistEH;
 import moduls.gestioEmpleats.gestioET.model.classes.ArraylistET;
 import main.Core;
-import moduls.gestioUsuaris.model.classes.SingletonUsuaris;
+import moduls.gestioTipusEvent.model.classes.SingletonTipusEvent;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import utils.Menus;
 import utils.Themes;
 
@@ -36,7 +37,8 @@ public class Configuracio {
         Data.formatdata = formatdata;
         Themes.temaElegit(tema);
         SingletonEF.efix = new ArrayList<>();
-        SingletonUsuaris.usAl = new ArrayList<>();
+        SingletonUsuari.usAl = new ArrayList<>();
+        SingletonTipusEvent.tevntAl=new ArrayList<>();
         ArraylistEH.ehores = new ArrayList<>();
         ArraylistEH.ehores = new ArrayList<>();
         ArraylistET.etemporal = new ArrayList<>();

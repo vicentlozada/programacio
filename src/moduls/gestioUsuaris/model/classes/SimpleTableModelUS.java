@@ -109,14 +109,14 @@ public class SimpleTableModelUS extends AbstractTableModel {
     public void cargar() {
         dades.clear();
         dadesauxiliar.clear();
-        SingletonUsuaris.usAl.clear();
+        SingletonUsuari.usAl.clear();
         Connection conn = Connexio.connectar();
 
         GUDAOBd.omplirArray(conn);
 
         Connexio.desconnectar(conn);
         try {
-            for (Usuari usAl : SingletonUsuaris.usAl) {
+            for (Usuari usAl : SingletonUsuari.usAl) {
                 addRow(usAl);
                 dadesauxiliar.add(usAl);
             }
