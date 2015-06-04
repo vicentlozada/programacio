@@ -7,13 +7,20 @@ package moduls.gestioEmpleats.gestioEF.model.dao.EFDAO;
 
 import classes.Data;
 import com.toedter.calendar.JTextFieldDateEditor;
+import javax.swing.JViewport;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import main.Core;
 import moduls.gestioEmpleats.classes.Empleat;
 import static moduls.gestioEmpleats.gestioEF.controlador.ControladorEF.frmAltaEF;
+import static moduls.gestioEmpleats.gestioEF.controlador.ControladorEF.frmPagerEF;
 import static moduls.gestioEmpleats.gestioEF.controlador.ControladorEF.frmModiEF;
+import static moduls.gestioEmpleats.gestioEF.controlador.ControladorEF.frmPagerEF;
 import moduls.gestioEmpleats.gestioEF.model.bll.EFBLL;
 import moduls.gestioEmpleats.gestioEF.model.classes.EmpleatFix;
+import moduls.gestioEmpleats.gestioEF.model.classes.SimpleTableModelEF;
 import moduls.gestioEmpleats.gestioEF.model.classes.SingletonEF;
+import moduls.gestioEmpleats.gestioEF.pager.Pagina;
 import static moduls.gestioInici.model.classes.SingletonInici.buit;
 import static moduls.gestioInici.model.classes.SingletonInici.cancel;
 import static moduls.gestioInici.model.classes.SingletonInici.ok;
@@ -420,5 +427,99 @@ public class EFDAOGrafic {
             }
         }
     }
+    
+    public static int posicioAbsolutaDAOGrafic() {
+        int n, selection, inicio, selection1 = 0;
+        n = ((SimpleTableModelEF) frmPagerEF.taula.getModel()).getRowCount();
+        if (n != 0) {
+            inicio = (Pagina.currentPageIndex - 1) * Pagina.itemsPerPage;
+            selection = frmPagerEF.taula.getSelectedRow();
+            selection1 = inicio + selection;
+        } else {
+            selection1 = -1;
+        }
+        return selection1;
+    }    
+    
+    /**
+     * personalitzem l'ample de les columnes
+     */
+    public static void setAmpleColumnesDAOGrafic() {
+        JViewport scroll = (JViewport) frmPagerEF.taula.getParent();
+        int ample = scroll.getWidth();
+        int ampleColumna = 0;
+        TableColumnModel modelColumna = frmPagerEF.taula.getColumnModel();
+        TableColumn columnaTaula;
+        for (int i = 0; i < frmPagerEF.taula.getColumnCount(); i++) {
+            columnaTaula = modelColumna.getColumn(i);
+            switch (i) {
+                case 0:
+                    ampleColumna = (17 * ample) / 100;
+                    break;
+                case 1:
+                    ampleColumna = (30 * ample) / 100;
+                    break;
+                case 2:
+                    ampleColumna = (18 * ample) / 100;
+                    break;
+                case 3:
+                    ampleColumna = (18 * ample) / 100;
+                    break;
+                case 4:
+                    ampleColumna = (17 * ample) / 100;
+                    break;
+            }
+            columnaTaula.setPreferredWidth(ampleColumna);
+        }        
+    }    
+    
+    /**
+     * ompli els camps en frm modificar
+     *
+     * @param ef
+     */
+    public static void omplirCampsMDAOGrafic() {
+        float soubase1 = SingletonEF.ef.getSoubase();
+        float soubase2 = soubase1 * Core.conf.getFactorconv();
+        float sou1 = SingletonEF.ef.getSou();
+        float sou2 = sou1 * Core.conf.getFactorconv();
 
+        frmModiEF.txtDni.setText(SingletonEF.ef.getDni());
+        frmModiEF.txtNom.setText(SingletonEF.ef.getNom());
+        frmModiEF.txtEmail.setText(SingletonEF.ef.getEmail());
+        frmModiEF.DateDataNaixement.setDate(Data.datatodate(SingletonEF.ef.getDatanaixement()));
+
+        frmModiEF.DateDatacontratacio.setDate(Data.datatodate(SingletonEF.ef.getDatacontratacio()));
+        frmModiEF.txtSalariBase.setText("" + soubase2);
+        frmModiEF.lblEdat.setText("" + SingletonEF.ef.getEdat());
+        frmModiEF.lblAntiguitat1.setText("" + SingletonEF.ef.getAntiguitat());
+        frmModiEF.lblAntiguitat2.setText("" + SingletonEF.ef.getPercent());
+        frmModiEF.lblSalari.setText(Format.formatConfig(sou2, Core.conf));
+        frmModiEF.lblbDni.setIcon(buit);
+        frmModiEF.lblbNom.setIcon(buit);
+        frmModiEF.lblbDnaixement.setIcon(buit);
+        frmModiEF.lblbDcontratacio.setIcon(buit);
+        frmModiEF.lblbSalariBase.setIcon(buit);
+        frmModiEF.lblbEmail.setIcon(buit);
+    }    
+
+
+
+    public static void cancelarEFADAOGrafic() {
+        frmAltaEF.txtNom.setText(null);
+        frmAltaEF.txtDni.setText(null);
+        frmAltaEF.DateDataNaixement.setCalendar(null);
+        frmAltaEF.DateDatacontratacio.setCalendar(null);
+        frmAltaEF.txtSalariBase.setText(null);
+        frmAltaEF.lblEdat.setText(null);
+        frmAltaEF.lblSalari.setText(null);
+        frmAltaEF.lblbDni.setIcon(buit);
+        frmAltaEF.lblbNom.setIcon(buit);
+        frmAltaEF.lblbSalariBase.setIcon(buit);
+        frmAltaEF.lblbDnaixement.setIcon(buit);
+        frmAltaEF.lblbDcontratacio.setIcon(buit);
+        frmAltaEF.lblAntiguitat1.setText(null);
+        frmAltaEF.lblAntiguitat2.setText(null);
+        frmAltaEF.txtDni.requestFocus();
+    }    
 }

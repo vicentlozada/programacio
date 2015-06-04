@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import static moduls.gestioEmpleats.gestioEF.model.classes.SimpleTableModelEF.dades;
 import moduls.gestioEmpleats.gestioEF.pager.Pagina;
-import moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF;
+import moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF;
 import main.Core;
 import moduls.gestioEmpleats.gestioEF.model.dao.EFDAO.EFDAOBd;
 import utils.Format;
@@ -132,17 +132,17 @@ public class SimpleTableModelEF extends AbstractTableModel {
         dades.clear();
 
         int cont = 0;
-        String nom = FrmInterfaceEF.txtFiltre.getText();
+        String nom = FrmPagerEF.txtFiltre.getText();
         for (int i = 0; i < dadesauxiliar.size(); i++) {
             if (dadesauxiliar.get(i).getNom().contains(nom)) {
                 addRow(dadesauxiliar.get(i));
                 cont++;
             }
         }
-        FrmInterfaceEF.lblContador.setText("" + cont);
+        FrmPagerEF.lblContador.setText("" + cont);
         Pagina.initLinkBox();
     }
-
+/*
     public EmpleatFix buscar(String u) {
         dades.clear();
         cargar();
@@ -155,8 +155,10 @@ public class SimpleTableModelEF extends AbstractTableModel {
             }
         }
         return null;
-    }
-
+    }    
+    */
+    
+/*
     public int buscaUsuario(EmpleatFix ef) {
         dades.clear();
         cargar();
@@ -168,5 +170,5 @@ public class SimpleTableModelEF extends AbstractTableModel {
         }
         return -1;
     }
-
+*/
 }

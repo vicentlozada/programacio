@@ -189,9 +189,7 @@ public class EFDAOBd {
     public static String empleatMesAnticDAO(Connection conn) {
         CallableStatement cstmt = null;
         String resultat = null;
-
         try {
-
             cstmt = (CallableStatement) conn.prepareCall("{call empleat_mes_antic(?, ?, ?)}");
             cstmt.registerOutParameter(1, java.sql.Types.VARCHAR);
             cstmt.registerOutParameter(2, java.sql.Types.VARCHAR);
@@ -199,10 +197,8 @@ public class EFDAOBd {
             cstmt.execute();
             resultat = cstmt.getString(1);
             resultat = resultat + " - " + cstmt.getString(2);
-            resultat = resultat + " - " + cstmt.getString(3);
-            
-            System.out.println(resultat);
-
+            resultat = resultat + " - " + cstmt.getString(3);    
+            //System.out.println(resultat);
         } catch (SQLException sqlex) {
             System.out.println(sqlex.getMessage());
         } catch (Exception ex) {

@@ -20,8 +20,9 @@ import moduls.gestioTipusEvent.model.classes.TipusEvent;
  */
 public class GTEDAOBd {
 
-    public static boolean cercarTipusEventDAO(Connection conn) {
+    public static boolean omplirArrayTipusEventDAO(Connection conn) {
         String tipusevent;
+        SingletonTipusEvent.tevntAl.clear();
 
         String query = ("SELECT * FROM tipusevent ORDER BY tipusevent");
         try {

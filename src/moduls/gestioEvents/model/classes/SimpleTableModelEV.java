@@ -3,21 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package moduls.gestioUsuaris.model.classes;
+package moduls.gestioEvents.model.classes;
 
 import classes.Connexio;
+import classes.Data;
 import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
-import moduls.gestioUsuaris.model.dao.GUDAOBd;
-import moduls.gestioUsuaris.pager.Pagina;
-import moduls.gestioUsuaris.vista.FrmPagerUsuari;
+import moduls.gestioEvents.model.dao.GEDAOBd;
+import moduls.gestioEvents.pager.Pagina;
+import moduls.gestioEvents.vista.FrmPagerEvent;
+import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 
-public class SimpleTableModelUS extends AbstractTableModel {
+/**
+ *
+ * @author Vicent
+ */
+public class SimpleTableModelEV extends AbstractTableModel {
 
-    public static ArrayList<Usuari> dades = new ArrayList<>();
-    public static ArrayList<Usuari> dadesauxiliar = new ArrayList<>();
-    String[] columnes = {"Login", "Nom", "Email", "Tipus", "Edat"};
+    public static ArrayList<Event> dades = new ArrayList<>();
+    public static ArrayList<Event> dadesauxiliar = new ArrayList<>();
+    String[] columnes = {"Núm. Event", "Data Reserva", "Tipus Event", "Data Event"};
 
     ////////////////////estos métodos son necesarios para que jtable funcione/////////////////////
     @Override
@@ -42,24 +48,21 @@ public class SimpleTableModelUS extends AbstractTableModel {
     public Object getValueAt(int row, int col) {
 
         String dev = null;
-        Usuari fila;
+        Event fila;
 
-        fila = (Usuari) SimpleTableModelUS.dades.get(row);
+        fila = (Event) SimpleTableModelEV.dades.get(row);
         switch (col) {
             case 0:
-                dev = fila.getLogin();
+                dev = Integer.toString(fila.getIdevent());
                 break;
             case 1:
-                dev = fila.getNom();
+                dev = Data.datatoString(fila.getDataidevent());
                 break;
             case 2:
-                dev = fila.getEmail();
+                dev = fila.getTipusevent();
                 break;
             case 3:
-                dev = fila.getTipus();
-                break;
-            case 4:
-                dev = Integer.toString(fila.getEdat());
+                dev = Data.datatoString(fila.getDataevent());
                 break;
         }
 
@@ -75,29 +78,26 @@ public class SimpleTableModelUS extends AbstractTableModel {
     //Actualiza un objeto de una fila y columna
     @Override
     public void setValueAt(Object value, int row, int col) {
-        Usuari fila = (Usuari) dades.get(row);
+        Event fila = (Event) dades.get(row);
         switch (col) {
             case 0:
-                fila.setLogin(value.toString());
-                break;            
+                fila.setIdevent(Integer.parseInt(value.toString()));
+                break;
             case 1:
-                fila.setNom(value.toString());
+                fila.setDataidevent(new Data(value.toString(), Data.getFormatdata()));
                 break;
             case 2:
-                fila.setEmail(value.toString());
+                fila.setTipusevent(value.toString());
                 break;
             case 3:
-                fila.setTipus(value.toString());
-                break;
-            case 4:
-                fila.setEdat(Integer.parseInt(value.toString()));
+                fila.setDataevent(new Data(value.toString(), Data.getFormatdata()));
                 break;
         }
         fireTableCellUpdated(row, col);
     }
 
-    public void addRow(Usuari u) {
-        dades.add(u);
+    public void addRow(Event e) {
+        dades.add(e);
         fireTableDataChanged();
     }
 
@@ -109,16 +109,18 @@ public class SimpleTableModelUS extends AbstractTableModel {
     public void cargar() {
         dades.clear();
         dadesauxiliar.clear();
-        SingletonUsuari.usAl.clear();
+        SingletonEvent.evAL.clear();
         Connection conn = Connexio.connectar();
-
-        GUDAOBd.omplirArray(conn);
-
+        if ("admin".equals(SingletonUsuari.us2.getTipus())) {
+            GEDAOBd.omplirArray2(conn);
+        } else {
+            GEDAOBd.omplirArray(conn);
+        }
         Connexio.desconnectar(conn);
         try {
-            for (Usuari usAl : SingletonUsuari.usAl) {
-                addRow(usAl);
-                dadesauxiliar.add(usAl);
+            for (Event evAl : SingletonEvent.evAL) {
+                addRow(evAl);
+                dadesauxiliar.add(evAl);
             }
         } catch (Exception e) {
         }
@@ -135,41 +137,42 @@ public class SimpleTableModelUS extends AbstractTableModel {
         dades.clear();
 
         int cont = 0;
-        String login = FrmPagerUsuari.txtFiltre.getText();
+        String tipusevent = FrmPagerEvent.txtFiltre.getText();
         for (int i = 0; i < dadesauxiliar.size(); i++) {
-            if (dadesauxiliar.get(i).getLogin().contains(login)) {
+            if (dadesauxiliar.get(i).getTipusevent().contains(tipusevent)) {
                 addRow(dadesauxiliar.get(i));
                 cont++;
             }
         }
-        FrmPagerUsuari.lblContador.setText("" + cont);
+        FrmPagerEvent.lblContador.setText("" + cont);
         Pagina.initLinkBox();
     }
 
-    public Usuari buscar(String u) {
-        dades.clear();
-        cargar();
+    /*
+     public Event buscar(String e) {
+     dades.clear();
+     cargar();
 
-        String res;
-        for (int i = 0; i < dades.size(); i++) {
-            res = dades.get(i).toString();
-            if (res.contains(u)) {
-                return dades.get(i);
-            }
-        }
-        return null;
-    }
+     String res;
+     for (int i = 0; i < dades.size(); i++) {
+     res = dades.get(i).toString();
+     if (res.contains(e)) {
+     return dades.get(i);
+     }
+     }
+     return null;
+     }
 
-    public int buscaUsuario(Usuari u) {
-        dades.clear();
-        cargar();
+     public int buscaUsuario(Event e) {
+     dades.clear();
+     cargar();
 
-        for (int i = 0; i < dades.size(); i++) {
-            if (dades.get(i).equals(u)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
+     for (int i = 0; i < dades.size(); i++) {
+     if (dades.get(i).equals(e)) {
+     return i;
+     }
+     }
+     return -1;
+     }
+     */
 }

@@ -108,6 +108,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEvent">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="N&#xfa;m. Event"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -118,6 +121,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtUsuari">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Usuari/Client"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -221,6 +227,7 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="toolTipText" type="java.lang.String" value="Observacions"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -238,6 +245,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Tipus d&apos;Event"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -250,6 +258,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="dataEvent">
           <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Data Event"/>
             <Property name="dateFormatString" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="Data.formato(Data.getFormatdata())" type="code"/>
             </Property>
@@ -301,6 +310,7 @@
         <Component class="javax.swing.JButton" name="btnAcceptar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Acceptar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Acceptar"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -309,6 +319,7 @@
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancel&#xb7;lar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Cancel&#xb7;lar"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

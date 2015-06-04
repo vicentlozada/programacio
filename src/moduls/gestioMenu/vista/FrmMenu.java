@@ -145,7 +145,7 @@ public class FrmMenu extends JFrameConFondo {
 
         mMenuppal.add(mArxiu);
 
-        mEmpleats.setText("Empleats");
+        mEmpleats.setText("Gestió d'Empleats");
 
         mEmpleatFix.setText("Empleat Fix");
         mEmpleatFix.addActionListener(new java.awt.event.ActionListener() {
@@ -163,9 +163,14 @@ public class FrmMenu extends JFrameConFondo {
 
         mMenuppal.add(mEmpleats);
 
-        jMenu2.setText("Events");
+        jMenu2.setText("Gestió d'Events");
 
-        mEvent.setText("Alta Events");
+        mEvent.setText("Events");
+        mEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mEventActionPerformed(evt);
+            }
+        });
         jMenu2.add(mEvent);
 
         mMenuppal.add(jMenu2);
@@ -213,7 +218,7 @@ public class FrmMenu extends JFrameConFondo {
 
         mConfiguracions.add(mApariencia);
 
-        mUsuari.setText("Usuaris");
+        mUsuari.setText("Gestió d'Usuaris");
         mConfiguracions.add(mUsuari);
 
         mMenuppal.add(mConfiguracions);
@@ -279,6 +284,10 @@ public class FrmMenu extends JFrameConFondo {
     private void mGuardarEFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGuardarEFActionPerformed
 
     }//GEN-LAST:event_mGuardarEFActionPerformed
+
+    private void mEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mEventActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mEventActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu2;

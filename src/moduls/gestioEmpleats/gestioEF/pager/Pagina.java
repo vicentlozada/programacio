@@ -12,8 +12,8 @@ import javax.swing.JRadioButton;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import moduls.gestioEmpleats.gestioEF.model.classes.SimpleTableModelEF;
-import moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF;
-import static moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.taula;
+import moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF;
+import static moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.taula;
 
 public class Pagina {
 
@@ -27,14 +27,14 @@ public class Pagina {
 
     public static void inicializa() {
         int rowCount = 0;
-        rowCount = ((SimpleTableModelEF) moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.taula.getModel()).getRowCount();
+        rowCount = ((SimpleTableModelEF) moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.taula.getModel()).getRowCount();
 
         int v = rowCount % itemsPerPage == 0 ? 0 : 1;
         maxPageIndex = rowCount / itemsPerPage + v;
 
         box.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-        FrmInterfaceEF.jPanel4.setLayout(new BorderLayout());
-        FrmInterfaceEF.jPanel4.add(Pagina.box);
+        FrmPagerEF.jPanel4.setLayout(new BorderLayout());
+        FrmPagerEF.jPanel4.add(Pagina.box);
     }
 
     public static void initLinkBox() {
@@ -56,7 +56,7 @@ public class Pagina {
 
         int rowCount = 0;
 
-        rowCount = ((SimpleTableModelEF) moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.taula.getModel()).getRowCount();
+        rowCount = ((SimpleTableModelEF) moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.taula.getModel()).getRowCount();
 
         int v = rowCount % itemsPerPage == 0 ? 0 : 1;
         maxPageIndex = rowCount / itemsPerPage + v;
@@ -69,11 +69,11 @@ public class Pagina {
         if ((rowCount <= itemsPerPage) && (rowCount > 0)) { //caben todos los datos en la misma página
 
             //actualizar botones y caja: desactivarlos
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnPrimer.setEnabled(false);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnAnterior.setEnabled(false);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnSeguent.setEnabled(false);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnUltim.setEnabled(false);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.CAJA.setText("");
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnPrimer.setEnabled(false);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnAnterior.setEnabled(false);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnSeguent.setEnabled(false);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnUltim.setEnabled(false);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.CAJA.setText("");
 
             //actualizar enlaces: sólo 1 enlace
             ButtonGroup bg = new ButtonGroup();
@@ -91,11 +91,11 @@ public class Pagina {
         } else if (rowCount == 0) { //no hay rdos
 
             //actualizar botones y caja: desactivarlos
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnPrimer.setEnabled(false);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnAnterior.setEnabled(false);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnSeguent.setEnabled(false);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnUltim.setEnabled(false);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.CAJA.setText("");
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnPrimer.setEnabled(false);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnAnterior.setEnabled(false);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnSeguent.setEnabled(false);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnUltim.setEnabled(false);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.CAJA.setText("");
 
             //actualizar enlaces: no hay enlaces
             ButtonGroup bg = new ButtonGroup();
@@ -113,11 +113,11 @@ public class Pagina {
 
         } else if (rowCount > itemsPerPage) {
 
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnPrimer.setEnabled(currentPageIndex > 1);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnAnterior.setEnabled(currentPageIndex > 1);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnSeguent.setEnabled(currentPageIndex < maxPageIndex);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.btnUltim.setEnabled(currentPageIndex < maxPageIndex);
-            moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF.CAJA.setText(Integer.toString(currentPageIndex) + String.format(" / %d", maxPageIndex));
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnPrimer.setEnabled(currentPageIndex > 1);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnAnterior.setEnabled(currentPageIndex > 1);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnSeguent.setEnabled(currentPageIndex < maxPageIndex);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.btnUltim.setEnabled(currentPageIndex < maxPageIndex);
+            moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF.CAJA.setText(Integer.toString(currentPageIndex) + String.format(" / %d", maxPageIndex));
 
             ButtonGroup bg = new ButtonGroup();
             box.add(Box.createHorizontalGlue());

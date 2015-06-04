@@ -21,7 +21,8 @@ public class SingletonInici {
     public static String igatge_mail = "src/images/catering.jpg";
     public static String default_tipus = "user";
     public static String default_login = "login";
-    
+    public static String avatar_temp;
+
     public static String user_mail = "1erdaw2015@gmail.com";
     public static String pass_mail = "villadaw";
 

@@ -1,5 +1,9 @@
 package moduls.gestioEvents.vista;
 
+
+
+
+
 import classes.Data;
 
 /*
@@ -15,7 +19,7 @@ import classes.Data;
 public class FrmEvents extends javax.swing.JDialog {
 
     /**
-     * Creates new form FrmEvent
+     * Creates new form FrmEvents
      */
     public FrmEvents() {
         initComponents();
@@ -55,7 +59,11 @@ public class FrmEvents extends javax.swing.JDialog {
 
         jLabel1.setText("Núm. Event");
 
+        txtEvent.setToolTipText("Núm. Event");
+
         jLabel2.setText("Usuari/Client");
+
+        txtUsuari.setToolTipText("Usuari/Client");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -107,12 +115,16 @@ public class FrmEvents extends javax.swing.JDialog {
 
         txtObservacions.setColumns(20);
         txtObservacions.setRows(5);
+        txtObservacions.setToolTipText("Observacions");
         jScrollPane1.setViewportView(txtObservacions);
 
         jLabel4.setText("Observacions");
 
+        cmbTipus.setToolTipText("Tipus d'Event");
+
         jLabel3.setText("Tipus");
 
+        dataEvent.setToolTipText("Data Event");
         dataEvent.setDateFormatString(Data.formato(Data.getFormatdata()));
 
         jLabel5.setText("Data");
@@ -160,8 +172,10 @@ public class FrmEvents extends javax.swing.JDialog {
         );
 
         btnAcceptar.setText("Acceptar");
+        btnAcceptar.setToolTipText("Acceptar");
 
         btnCancelar.setText("Cancel·lar");
+        btnCancelar.setToolTipText("Cancel·lar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

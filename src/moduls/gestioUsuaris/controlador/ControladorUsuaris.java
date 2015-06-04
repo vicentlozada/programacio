@@ -18,14 +18,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
-import javax.swing.JViewport;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import moduls.gestioInici.model.classes.SingletonInici;
 import static moduls.gestioInici.model.classes.SingletonInici.afegir1;
 import static moduls.gestioInici.model.classes.SingletonInici.afegir2;
+import static moduls.gestioInici.model.classes.SingletonInici.avatar_temp;
 import static moduls.gestioInici.model.classes.SingletonInici.editar1;
 import static moduls.gestioInici.model.classes.SingletonInici.editar2;
 import static moduls.gestioInici.model.classes.SingletonInici.eliminar1;
@@ -52,7 +50,7 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
     public static TableRowSorter<TableModel> sorter = new TableRowSorter<>(new SimpleTableModelUS());
     public static FrmUsuari frmUsuari = new FrmUsuari();
     public static FrmPagerUsuari frmPagerUsuari = new FrmPagerUsuari();
-    public static String avatar_temp;
+
 
     public ControladorUsuaris(JDialog frm, int i) {
         switch (i) {
@@ -107,6 +105,7 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
             case 0: // 
 
                 frmPagerUsuari.setTitle("Usuaris");
+                frmPagerUsuari.setIconImage(imageicono); // icono de la finestra                
                 frmPagerUsuari.setVisible(true);
                 frmPagerUsuari.setResizable(false);
                 frmPagerUsuari.setLocationRelativeTo(null);
@@ -114,17 +113,19 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                 frmPagerUsuari.taula.setModel(new SimpleTableModelUS());
                 ((SimpleTableModelUS) frmPagerUsuari.taula.getModel()).cargar();
                 frmPagerUsuari.taula.setFillsViewportHeight(true);
-                frmPagerUsuari.taula.addRowSelectionInterval(0, 0); // seleccionem la primera fila 
+                frmPagerUsuari.taula.setRowSorter(sorter);
 
-                setAmpleColumnes(); // personalitzem l'ample de les columnes
+                GUBLL.setAmpleColumnesBLL(); // personalitzem l'ample de les columnes
 
                 Pagina.inicializa();
                 Pagina.initLinkBox();
 
-                // icono de la finestra
-                frmPagerUsuari.setIconImage(imageicono);
-
                 frmPagerUsuari.cmbEntradesMostrades.setSelectedItem("" + itemsPerPage);
+                frmPagerUsuari.lblContador.setText(String.valueOf(usAl.size()));            
+                
+                if (!usAl.isEmpty()) {
+                    frmPagerUsuari.taula.addRowSelectionInterval(0, 0); // seleccionem la primera fila  
+                }                   
 
                 // acció de tancar la finestra
                 frmPagerUsuari.addWindowListener(new WindowAdapter() {
@@ -134,19 +135,6 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                         frmPagerUsuari.dispose();
                     }
                 });
-                /*
-                 String var = empleatMesAnticBLL();
-                 if (var != null) {
-                 var = "Empleat amb més temps a l'empresa: " + var;
-                 frmIntEF.lblMesAntic.setText(var);
-                 }
-                 */
-                frmPagerUsuari.lblContador.setText(String.valueOf(usAl.size()));
-
-                frmPagerUsuari.taula.setFillsViewportHeight(true);
-                frmPagerUsuari.taula.setRowSorter(sorter);
-
-                frmPagerUsuari.taula.addRowSelectionInterval(0, 0); // seleccionem la primera fila 
 
                 // combo mostrar nombre d'entrades per pàgina
                 frmPagerUsuari.cmbEntradesMostrades.setActionCommand("_CMB_ENTRADESMOSTRADES");
@@ -555,10 +543,11 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
 
     @Override
     public void mouseClicked(MouseEvent me) {
+        int selec;
         switch (Accion.valueOf(me.getComponent().getName())) {
             // frmPagerUsuari
             case _BTN_MODIFICAR:
-                int selec = posicioAbsoluta();
+                selec = GUBLL.posicioAbsolutaBLL();
                 if (selec == -1) {
                 } else {
                     String login = (String) frmPagerUsuari.taula.getModel().getValueAt(selec, 0);
@@ -568,25 +557,30 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                 }
                 break;
             case _BTN_AFEGIR:
-                selec = posicioAbsoluta();
-                if (selec == -1) {
-                } else {
-                    new ControladorUsuaris(new FrmUsuari(), 1).iniciar(1);
-                    frmPagerUsuari.dispose();
+                if (!SingletonUsuari.usAl.isEmpty()) {
+                    selec = GUBLL.posicioAbsolutaBLL();
+                    if (selec == -1) {
+                    } else {
+                        new ControladorUsuaris(new FrmUsuari(), 1).iniciar(1);
+                        frmPagerUsuari.dispose();
+                    }
                 }
                 break;
             case _BTN_ELIMINAR:
-                frmPagerUsuari.dispose();
-                selec = posicioAbsoluta();
-                if (selec == -1) {
-                } else {
-                    String login = (String) frmPagerUsuari.taula.getModel().getValueAt(selec, 0);
-                    SingletonUsuari.us = new Usuari(login);
-                    if (GUBLL.eliminarUS()) {
-                        frmPagerUsuari.txtFiltre.setText(null);
+                if (!SingletonUsuari.usAl.isEmpty()) {
+                    selec = GUBLL.posicioAbsolutaBLL();
+                    if (selec == -1) {
+                    } else {
+                        String login = (String) frmPagerUsuari.taula.getModel().getValueAt(selec, 0);
+                        SingletonUsuari.us = new Usuari(login);
+                        if (!SingletonUsuari.us.equals(SingletonUsuari.us2)) {
+                            if (GUBLL.eliminarUS()) {
+                                new ControladorUsuaris(new FrmPagerUsuari(), 0).iniciar(0);
+                                frmPagerUsuari.dispose();
+                            }
+                        }
                     }
                 }
-                new ControladorUsuaris(new FrmPagerUsuari(), 0).iniciar(0);
                 break;
             // 
             case _LBL_AVATAR_DEFAULT:
@@ -707,51 +701,6 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                 GUBLL.validarEmailBLL();
                 break;
         }
-    }
-
-    /**
-     * personalitzem l'ample de les columnes
-     */
-    private void setAmpleColumnes() {
-        JViewport scroll = (JViewport) frmPagerUsuari.taula.getParent();
-        int ample = scroll.getWidth();
-        int ampleColumna = 0;
-        TableColumnModel modelColumna = frmPagerUsuari.taula.getColumnModel();
-        TableColumn columnaTaula;
-        for (int i = 0; i < frmPagerUsuari.taula.getColumnCount(); i++) {
-            columnaTaula = modelColumna.getColumn(i);
-            switch (i) {
-                case 0:
-                    ampleColumna = (20 * ample) / 100;
-                    break;
-                case 1:
-                    ampleColumna = (30 * ample) / 100;
-                    break;
-                case 2:
-                    ampleColumna = (30 * ample) / 100;
-                    break;
-                case 3:
-                    ampleColumna = (10 * ample) / 100;
-                    break;
-                case 4:
-                    ampleColumna = (10 * ample) / 100;
-                    break;
-            }
-            columnaTaula.setPreferredWidth(ampleColumna);
-        }
-    }
-
-    private int posicioAbsoluta() {
-        int n, selection, inicio, selection1 = 0;
-        n = ((SimpleTableModelUS) frmPagerUsuari.taula.getModel()).getRowCount();
-        if (n != 0) {
-            inicio = (Pagina.currentPageIndex - 1) * Pagina.itemsPerPage;
-            selection = frmPagerUsuari.taula.getSelectedRow();
-            selection1 = inicio + selection;
-        } else {
-            selection1 = -1;
-        }
-        return selection1;
     }
 
 }

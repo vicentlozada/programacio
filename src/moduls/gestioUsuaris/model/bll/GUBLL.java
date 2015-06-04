@@ -177,15 +177,12 @@ public class GUBLL {
 
     public static boolean eliminarUS() {
         int pos = buscarLoginUsuari();
-        String login;
-        Boolean correcte = Menus.confirmar("Eliminar\n" + SingletonUsuari.usAl.get(pos).getNom() + "?", "Eliminar Usuari");
-        if (correcte) {
-            SingletonUsuari.us = SingletonUsuari.usAl.get(pos);
-            login = SingletonUsuari.usAl.get(pos).getLogin();
+        String login = SingletonUsuari.usAl.get(pos).getLogin();
+        Boolean correcte = Menus.confirmar("Eliminar\n" + login + "?", "Eliminar Usuari");
+        if (correcte) {         
             Connection conn = Connexio.connectar();
             if (conn != null) {
                 if (GUDAOBd.eliminarUsuariDAOBd(login, conn) == 1) {
-                    SingletonUsuari.usAl.remove(SingletonUsuari.us);
                     Connexio.desconnectar(conn);
                     return true;
                 }
@@ -194,6 +191,9 @@ public class GUBLL {
         return false;
     }    
     
+    public static int posicioAbsolutaBLL(){
+        return GUDAOGrafic.posicioAbsolutaDAOGrafic();
+    }
     //-------------------------------------------------------------------
     
     public static boolean validarUsuariBLL() {
@@ -290,6 +290,8 @@ public class GUBLL {
         return false;
     }         
     
-    
+    public static void setAmpleColumnesBLL(){
+        GUDAOGrafic.setAmpleColumnesDAOGrafic();
+    }
 
 }

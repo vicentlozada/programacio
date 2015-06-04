@@ -90,15 +90,12 @@ public class Event implements Comparable<Event>, Serializable {
         this.observacionsevent = observacionsevent;
     }
 
-
-
-
     @Override
     public int compareTo(Event evnt) {// para ordenar
-        if (this.getIdevent() > evnt.getIdevent()) {
+        if (this.getLogin().compareTo(evnt.getLogin()) > 0) {
             return 1;
         }
-        if (this.getIdevent() < evnt.getIdevent()) {
+        if (this.getLogin().compareTo(evnt.getLogin()) < 0) {
             return -1;
         }
         return 0;
@@ -106,7 +103,7 @@ public class Event implements Comparable<Event>, Serializable {
 
     @Override
     public boolean equals(Object e) {        
-        return this.getIdevent()==((Event)e).getIdevent();        
+        return getLogin().equals(((Event) e).getLogin());    
     }
 
     @Override

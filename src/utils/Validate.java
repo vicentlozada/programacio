@@ -105,7 +105,8 @@ public class Validate {
      * @return
      */
     public static boolean isValidFormatPassword(String password) {
-        String passwordPattern = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,20})$";
+        //String passwordPattern = "(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,20})$";
+        String passwordPattern = "^[A-Za-z0-9]{8,20}";
         return password.matches(passwordPattern);
     }
 

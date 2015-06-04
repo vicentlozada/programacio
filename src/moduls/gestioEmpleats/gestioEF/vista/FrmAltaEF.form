@@ -67,7 +67,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -93,7 +93,7 @@
                       <Component id="jTabbedPane2" min="-2" pref="343" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="lblAvatar2" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAvatar" min="-2" pref="80" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -108,7 +108,7 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="lblAvatar2" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAvatar" min="-2" pref="80" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="44" max="32767" attributes="0"/>
@@ -610,11 +610,8 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="lblAvatar2">
+        <Component class="javax.swing.JLabel" name="lblAvatar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/avatar.png"/>
-            </Property>
             <Property name="toolTipText" type="java.lang.String" value="Avatar"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">

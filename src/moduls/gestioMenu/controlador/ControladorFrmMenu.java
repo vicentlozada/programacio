@@ -18,9 +18,10 @@ import moduls.configuracio.controlador.ControladorFrmConfig;
 import moduls.configuracio.vista.FrmConfig;
 import moduls.gestioEmpleats.gestioEF.controlador.ControladorEF;
 import moduls.gestioEmpleats.gestioEF.model.bll.EFBLL;
-import moduls.gestioEmpleats.gestioEF.vista.FrmInterfaceEF;
+import moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF;
 import moduls.gestioEvents.controlador.ControladorEvents;
 import moduls.gestioEvents.vista.FrmEvents;
+import moduls.gestioEvents.vista.FrmPagerEvent;
 import moduls.gestioInici.model.classes.SingletonInici;
 import static moduls.gestioInici.model.classes.SingletonInici.imageicono;
 import moduls.gestioMenu.vista.FrmMenu;
@@ -158,11 +159,11 @@ public class ControladorFrmMenu implements ActionListener {
                 break;
             case M_EVENT:
                 frmMenu.setEnabled(false);
-                new ControladorEvents(new FrmEvents(), 0).iniciar(0);
+                new ControladorEvents(new FrmPagerEvent(), 0).iniciar(0);
                 break;                
             case M_EMPLEAT_FIX:
                 frmMenu.setEnabled(false);
-                new ControladorEF(new FrmInterfaceEF(), 0).iniciar(0);
+                new ControladorEF(new FrmPagerEF(), 0).iniciar(0);
                 break;
             case M_EMPLEAT_HORES:
                 break;

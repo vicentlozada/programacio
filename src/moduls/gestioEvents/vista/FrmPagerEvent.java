@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package moduls.gestioEmpleats.gestioEF.vista;
+package moduls.gestioEvents.vista;
 
 /**
  *
  * @author Vicent
  */
-public class FrmInterfaceEF extends javax.swing.JDialog {
+public class FrmPagerEvent extends javax.swing.JDialog {
 
-    public FrmInterfaceEF() {
+    /**
+     * Creates new form NewJDialog
+     */
+    public FrmPagerEvent() {
         initComponents();
     }
 
@@ -24,7 +27,13 @@ public class FrmInterfaceEF extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        cmbEntradesMostrades = new javax.swing.JComboBox();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtFiltre = new javax.swing.JTextField();
+        btnTancar = new javax.swing.JButton();
+        lblContador = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taula = new javax.swing.JTable();
@@ -42,20 +51,69 @@ public class FrmInterfaceEF extends javax.swing.JDialog {
         CAJA = new javax.swing.JTextField();
         btnPrimer = new javax.swing.JButton();
         btnUltim = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtFiltre = new javax.swing.JTextField();
-        btnTancar = new javax.swing.JButton();
-        lblContador = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        cmbEntradesMostrades = new javax.swing.JComboBox();
         lblMesAntic = new javax.swing.JLabel();
 
-        jCheckBox1.setText("jCheckBox1");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel2.setText("Entrades mostrades:");
+
+        cmbEntradesMostrades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "15", "20", "50", "100" }));
+        cmbEntradesMostrades.setToolTipText("Entrades mostrades");
+        cmbEntradesMostrades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbEntradesMostradesActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Filtrar per Tipus d'Event:");
+
+        txtFiltre.setToolTipText("Filtrar per Nom");
+        txtFiltre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltreKeyReleased(evt);
+            }
+        });
+
+        btnTancar.setText("Tancar");
+        btnTancar.setToolTipText("Tancar");
+        btnTancar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTancarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtFiltre, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblContador, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
+                .addComponent(btnTancar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnTancar)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblContador, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtFiltre))))
+                .addContainerGap())
+        );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -249,55 +307,6 @@ public class FrmInterfaceEF extends javax.swing.JDialog {
         });
         jPanel2.add(btnUltim, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, -1));
 
-        jLabel1.setText("Filtrar per Nom");
-
-        txtFiltre.setToolTipText("Filtrar per Nom");
-        txtFiltre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtFiltreKeyReleased(evt);
-            }
-        });
-
-        btnTancar.setText("Tancar");
-        btnTancar.setToolTipText("Tancar");
-        btnTancar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTancarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtFiltre, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblContador, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTancar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnTancar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblContador, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFiltre))))
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -306,36 +315,7 @@ public class FrmInterfaceEF extends javax.swing.JDialog {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
-
-        jLabel2.setText("Entrades mostrades:");
-
-        cmbEntradesMostrades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "15", "20", "50", "100" }));
-        cmbEntradesMostrades.setToolTipText("Entrades mostrades");
-        cmbEntradesMostrades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbEntradesMostradesActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbEntradesMostrades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
-                .addGap(0, 5, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbEntradesMostrades)
-                .addGap(4, 4, 4))
+            .addGap(0, 22, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -345,36 +325,52 @@ public class FrmInterfaceEF extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMesAntic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbEntradesMostrades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMesAntic, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbEntradesMostrades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMesAntic, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMesAntic, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmbEntradesMostradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEntradesMostradesActionPerformed
+
+    }//GEN-LAST:event_cmbEntradesMostradesActionPerformed
 
     private void txtFiltreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltreKeyReleased
 
@@ -384,25 +380,9 @@ public class FrmInterfaceEF extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnTancarActionPerformed
 
-    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+    private void taulaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaMousePressed
 
-    }//GEN-LAST:event_btnAnteriorActionPerformed
-
-    private void btnSeguentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguentActionPerformed
-
-    }//GEN-LAST:event_btnSeguentActionPerformed
-
-    private void btnPrimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimerActionPerformed
-
-    }//GEN-LAST:event_btnPrimerActionPerformed
-
-    private void btnUltimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimActionPerformed
-
-    }//GEN-LAST:event_btnUltimActionPerformed
-
-    private void cmbEntradesMostradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEntradesMostradesActionPerformed
-
-    }//GEN-LAST:event_cmbEntradesMostradesActionPerformed
+    }//GEN-LAST:event_taulaMousePressed
 
     private void btnAfegirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAfegirMouseClicked
 
@@ -416,26 +396,37 @@ public class FrmInterfaceEF extends javax.swing.JDialog {
 
     }//GEN-LAST:event_btnEliminarMouseClicked
 
-    private void btnXMLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXMLMouseClicked
-        
-    }//GEN-LAST:event_btnXMLMouseClicked
-
     private void btnTXTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTXTMouseClicked
-        
+
     }//GEN-LAST:event_btnTXTMouseClicked
 
+    private void btnXMLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnXMLMouseClicked
+
+    }//GEN-LAST:event_btnXMLMouseClicked
+
     private void btnJSONMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnJSONMouseClicked
-        
+
     }//GEN-LAST:event_btnJSONMouseClicked
 
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
+
+    }//GEN-LAST:event_btnAnteriorActionPerformed
+
+    private void btnSeguentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeguentActionPerformed
+
+    }//GEN-LAST:event_btnSeguentActionPerformed
+
     private void CAJAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CAJAActionPerformed
-        
+
     }//GEN-LAST:event_CAJAActionPerformed
 
-    private void taulaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_taulaMousePressed
+    private void btnPrimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimerActionPerformed
 
-    }//GEN-LAST:event_taulaMousePressed
+    }//GEN-LAST:event_btnPrimerActionPerformed
 
+    private void btnUltimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimActionPerformed
+
+    }//GEN-LAST:event_btnUltimActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField CAJA;
@@ -451,7 +442,6 @@ public class FrmInterfaceEF extends javax.swing.JDialog {
     public static javax.swing.JButton btnUltim;
     public javax.swing.JButton btnXML;
     public javax.swing.JComboBox cmbEntradesMostrades;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -459,7 +449,6 @@ public class FrmInterfaceEF extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     public static javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel lblContador;

@@ -6,9 +6,16 @@
 package moduls.gestioEvents.model.dao;
 
 import classes.Data;
+import javax.swing.JViewport;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import static moduls.gestioEvents.controlador.ControladorEvents.frmEvents;
+import static moduls.gestioEvents.controlador.ControladorEvents.frmPagerEvent;
 import moduls.gestioEvents.model.classes.Event;
+import moduls.gestioEvents.model.classes.SimpleTableModelEV;
 import moduls.gestioEvents.model.classes.SingletonEvent;
+import moduls.gestioEvents.pager.Pagina;
+import static moduls.gestioInici.model.classes.SingletonInici.buit;
 import static moduls.gestioInici.model.classes.SingletonInici.cancel;
 import static moduls.gestioInici.model.classes.SingletonInici.ok;
 
@@ -61,6 +68,60 @@ public class GEDAOGrafic {
         }
 
         return false;
+    }
+
+    /**
+     * personalitzem l'ample de les columnes
+     */
+    public static void setAmpleColumnesDAO() {
+        JViewport scroll = (JViewport) frmPagerEvent.taula.getParent();
+        int ample = scroll.getWidth();
+        int ampleColumna = 0;
+        TableColumnModel modelColumna = frmPagerEvent.taula.getColumnModel();
+        TableColumn columnaTaula;
+        for (int i = 0; i < frmPagerEvent.taula.getColumnCount(); i++) {
+            columnaTaula = modelColumna.getColumn(i);
+            switch (i) {
+                case 0:
+                    ampleColumna = (25 * ample) / 100;
+                    break;
+                case 1:
+                    ampleColumna = (25 * ample) / 100;
+                    break;
+                case 2:
+                    ampleColumna = (25 * ample) / 100;
+                    break;
+                case 3:
+                    ampleColumna = (25 * ample) / 100;
+                    break;
+            }
+            columnaTaula.setPreferredWidth(ampleColumna);
+        }
+    }
+
+    public static int posicioAbsolutaDAO() {
+        int n, selection, inicio, selection1 = 0;
+        n = ((SimpleTableModelEV) frmPagerEvent.taula.getModel()).getRowCount();
+        if (n != 0) {
+            inicio = (Pagina.currentPageIndex - 1) * Pagina.itemsPerPage;
+            selection = frmPagerEvent.taula.getSelectedRow();
+            selection1 = inicio + selection;
+        } else {
+            selection1 = -1;
+        }
+        return selection1;
+    }
+
+    public static void omplirCampsMDAO() {
+
+        frmEvents.txtEvent.setText(Integer.toString(SingletonEvent.ev.getIdevent()));
+        frmEvents.txtUsuari.setText(SingletonEvent.ev.getLogin());
+        frmEvents.cmbTipus.setSelectedItem(SingletonEvent.ev.getTipusevent());
+        frmEvents.txtObservacions.setText(SingletonEvent.ev.getObservacionsevent());
+        frmEvents.dataEvent.setDate(Data.datatodate(SingletonEvent.ev.getDataevent()));
+        
+        frmEvents.lblbDataEvent.setIcon(buit);        
+
     }
 
 }

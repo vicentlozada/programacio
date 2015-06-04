@@ -68,7 +68,7 @@ public class FrmAltaEF extends javax.swing.JDialog {
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnTancar = new javax.swing.JButton();
-        lblAvatar2 = new javax.swing.JLabel();
+        lblAvatar = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -443,10 +443,9 @@ public class FrmAltaEF extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        lblAvatar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/avatar.png"))); // NOI18N
-        lblAvatar2.setToolTipText("Avatar");
-        lblAvatar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblAvatar2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblAvatar.setToolTipText("Avatar");
+        lblAvatar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblAvatar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -458,7 +457,7 @@ public class FrmAltaEF extends javax.swing.JDialog {
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblAvatar2)
+                .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -470,7 +469,7 @@ public class FrmAltaEF extends javax.swing.JDialog {
                         .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(lblAvatar2)))
+                        .addComponent(lblAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9))
@@ -483,7 +482,7 @@ public class FrmAltaEF extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -624,7 +623,7 @@ public class FrmAltaEF extends javax.swing.JDialog {
     private javax.swing.JTabbedPane jTabbedPane2;
     public javax.swing.JLabel lblAntiguitat1;
     public javax.swing.JLabel lblAntiguitat2;
-    public javax.swing.JLabel lblAvatar2;
+    public javax.swing.JLabel lblAvatar;
     private javax.swing.JLabel lblDataNaixement;
     public javax.swing.JTextField lblEdat;
     private javax.swing.JLabel lblSBase;

@@ -57,7 +57,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="mEmpleats">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Empleats"/>
+            <Property name="text" type="java.lang.String" value="Gesti&#xf3; d&apos;Empleats"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -88,13 +88,16 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Events"/>
+            <Property name="text" type="java.lang.String" value="Gesti&#xf3; d&apos;Events"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mEvent">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Alta Events"/>
+                <Property name="text" type="java.lang.String" value="Events"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mEventActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -162,7 +165,7 @@
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="mUsuari">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Usuaris"/>
+                <Property name="text" type="java.lang.String" value="Gesti&#xf3; d&apos;Usuaris"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

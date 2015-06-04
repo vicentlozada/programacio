@@ -62,9 +62,9 @@ public class EFBLL {
             frmAltaEF.btnGuardar.requestFocus();
         }
     }
-    
-    public static void demanaSalariMBLL(){
-        if(EFDAOGrafic.demanaSalariMDAO()){
+
+    public static void demanaSalariMBLL() {
+        if (EFDAOGrafic.demanaSalariMDAO()) {
             frmModiEF.btnGuardar.requestFocus();
         }
     }
@@ -142,15 +142,12 @@ public class EFBLL {
      */
     public static boolean eliminarEF() {
         int pos = buscarDniEmpleat();
-        String dni;
+        String dni = SingletonEF.efix.get(pos).getDni();
         Boolean correcte = Menus.confirmar("Eliminar\n" + SingletonEF.efix.get(pos).getNom() + "?", "Empleat Fix: Eliminar");
         if (correcte) {
-            SingletonEF.ef = SingletonEF.efix.get(pos);
-            dni = SingletonEF.efix.get(pos).getDni();
             Connection conn = Connexio.connectar();
             if (conn != null) {
                 if (EFDAOBd.eliminar(dni, conn) == 1) {
-                    SingletonEF.efix.remove(SingletonEF.ef);
                     Connexio.desconnectar(conn);
                     return true;
                 }
@@ -283,6 +280,22 @@ public class EFBLL {
      */
     public static void obrirArxiuEFBLL() {
         EFDAOFitxers.obrirArxiuEFDAO();
+    }
+
+    public static int posicioAbsolutaBLL() {
+        return EFDAOGrafic.posicioAbsolutaDAOGrafic();
+    }
+
+    public static void setAmpleColumnesBLL() {
+        EFDAOGrafic.setAmpleColumnesDAOGrafic();
+    }
+
+    public static void omplirCampsMBLL() {
+        EFDAOGrafic.omplirCampsMDAOGrafic();
+    }
+    
+    public static void cancelarEFABLL(){
+        EFDAOGrafic.cancelarEFADAOGrafic();
     }
 
 }

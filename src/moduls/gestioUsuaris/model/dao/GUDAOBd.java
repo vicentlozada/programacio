@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import llibreries.Encriptar;
 import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import moduls.gestioUsuaris.model.classes.Usuari;
+import utils.Menus;
 
 /**
  *
@@ -399,7 +400,11 @@ public class GUDAOBd {
             }
             stmt.close();
         } catch (SQLException sqlex) {
-            System.out.println("Eliminar Dades:" + sqlex.getMessage());
+            //System.out.println("Eliminar Dades:" + sqlex.getMessage());
+            System.out.println("Eliminar Dades:" + sqlex.getErrorCode());
+            if(sqlex.getErrorCode()==1451){
+                Menus.warning("No es pot eliminar l'usuari si té Events associats!", "Atenció!");
+            }
         } catch (Exception ex) {
             System.out.println("Eliminar Dades:" + ex.getMessage());
         } finally {

@@ -7,6 +7,9 @@ package moduls.gestioUsuaris.model.dao;
 
 import classes.Data;
 import com.toedter.calendar.JTextFieldDateEditor;
+import javax.swing.JViewport;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import llibreries.Encriptar;
 import main.Core;
 import static moduls.gestioInici.controlador.ControladorInici.frmMail;
@@ -14,10 +17,13 @@ import static moduls.gestioInici.controlador.ControladorInici.frmSignIn;
 import static moduls.gestioInici.model.classes.SingletonInici.buit;
 import static moduls.gestioInici.model.classes.SingletonInici.cancel;
 import static moduls.gestioInici.model.classes.SingletonInici.ok;
+import static moduls.gestioUsuaris.controlador.ControladorUsuaris.frmPagerUsuari;
 import static moduls.gestioUsuaris.controlador.ControladorUsuaris.frmUsuari;
 import moduls.gestioUsuaris.model.bll.GUBLL;
+import moduls.gestioUsuaris.model.classes.SimpleTableModelUS;
 import moduls.gestioUsuaris.model.classes.SingletonUsuari;
 import moduls.gestioUsuaris.model.classes.Usuari;
+import moduls.gestioUsuaris.pager.Pagina;
 import utils.Funcions;
 import utils.Menus;
 import utils.Validate;
@@ -718,4 +724,49 @@ public class GUDAOGrafic {
 
     }
 
+    public static int posicioAbsolutaDAOGrafic() {
+        int n, selection, inicio, selection1 = 0;
+        n = ((SimpleTableModelUS) frmPagerUsuari.taula.getModel()).getRowCount();
+        if (n != 0) {
+            inicio = (Pagina.currentPageIndex - 1) * Pagina.itemsPerPage;
+            selection = frmPagerUsuari.taula.getSelectedRow();
+            selection1 = inicio + selection;
+        } else {
+            selection1 = -1;
+        }
+        return selection1;
+    }    
+    
+    /**
+     * personalitzem l'ample de les columnes
+     */
+    public static void setAmpleColumnesDAOGrafic() {
+        JViewport scroll = (JViewport) frmPagerUsuari.taula.getParent();
+        int ample = scroll.getWidth();
+        int ampleColumna = 0;
+        TableColumnModel modelColumna = frmPagerUsuari.taula.getColumnModel();
+        TableColumn columnaTaula;
+        for (int i = 0; i < frmPagerUsuari.taula.getColumnCount(); i++) {
+            columnaTaula = modelColumna.getColumn(i);
+            switch (i) {
+                case 0:
+                    ampleColumna = (20 * ample) / 100;
+                    break;
+                case 1:
+                    ampleColumna = (30 * ample) / 100;
+                    break;
+                case 2:
+                    ampleColumna = (30 * ample) / 100;
+                    break;
+                case 3:
+                    ampleColumna = (10 * ample) / 100;
+                    break;
+                case 4:
+                    ampleColumna = (10 * ample) / 100;
+                    break;
+            }
+            columnaTaula.setPreferredWidth(ampleColumna);
+        }
+    }    
+    
 }
