@@ -7,6 +7,7 @@ package moduls.gestioUsuaris.controlador;
 
 import llibreries.Upload;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -18,6 +19,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
+import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import moduls.gestioInici.model.classes.SingletonInici;
@@ -201,7 +203,8 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                 frmUsuari.setVisible(true);
 
                 avatar_temp = SingletonInici.default_avatar;
-                SingletonUsuari.us.setAvatar(avatar_temp);
+                SingletonUsuari.us.setAvatar(avatar_temp);              
+                
                 Upload.pintar_imatge(frmUsuari.lblAvatar, 80, 80, avatar_temp);
                 frmUsuari.lblTipus.setText(SingletonInici.default_tipus);
 
@@ -274,6 +277,7 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
 
                     frmUsuari.txtUsuari.setEnabled(false);
                 }
+                
                 frmUsuari.txtUsuari.setActionCommand("_TXT_USUARI");
                 frmUsuari.txtUsuari.setName("_TXT_USUARI");
                 frmUsuari.txtUsuari.addActionListener(this);
@@ -593,7 +597,21 @@ public class ControladorUsuaris implements ActionListener, KeyListener, MouseLis
                         SingletonUsuari.us.getAvatar()));
                 SingletonUsuari.us.setAvatar(ruta_avatar);
                 break;
+            case _TAULA:
+                frmPagerUsuari.taula = (JTable) me.getSource();
+                Point point = me.getPoint();
+                int row = frmPagerUsuari.taula.rowAtPoint(point);
+                if (me.getClickCount() == 2) {
+                    selec = GUBLL.posicioAbsolutaBLL();
+                    String login = (String) frmPagerUsuari.taula.getModel().getValueAt(selec, 0);
+                    SingletonUsuari.us = new Usuari(login);
+                    frmPagerUsuari.dispose();
+                    new ControladorUsuaris(new FrmUsuari(), 1).iniciar(3);
+                }
+                break;                
         }
+        
+        
     }
 
     @Override

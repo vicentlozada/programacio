@@ -30,9 +30,8 @@ import moduls.gestioEmpleats.gestioEF.model.classes.SingletonEF;
 import static moduls.gestioEmpleats.gestioEF.model.classes.SingletonEF.efix;
 import moduls.gestioEmpleats.gestioEF.pager.Pagina;
 import static moduls.gestioEmpleats.gestioEF.pager.Pagina.itemsPerPage;
-import moduls.gestioEmpleats.gestioEF.vista.FrmAltaEF;
+import moduls.gestioEmpleats.gestioEF.vista.FrmEF;
 import moduls.gestioEmpleats.gestioEF.vista.FrmPagerEF;
-import moduls.gestioEmpleats.gestioEF.vista.FrmModiEF;
 import moduls.gestioInici.model.classes.SingletonInici;
 import static moduls.gestioInici.model.classes.SingletonInici.afegir1;
 import static moduls.gestioInici.model.classes.SingletonInici.afegir2;
@@ -54,8 +53,8 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
 
     public static TableRowSorter<TableModel> sorter = new TableRowSorter<>(new SimpleTableModelEF());
     public static FrmPagerEF frmPagerEF = new FrmPagerEF();
-    public static FrmAltaEF frmAltaEF = new FrmAltaEF();
-    public static FrmModiEF frmModiEF = new FrmModiEF();
+    public static FrmEF frmAltaEF = new FrmEF();
+    public static FrmEF frmModiEF = new FrmEF();
 
     public ControladorEF(JDialog frm, int i) {
 
@@ -64,25 +63,12 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                 frmPagerEF = (FrmPagerEF) frm;
                 break;
             case 1:
-                frmAltaEF = (FrmAltaEF) frm;
+                frmAltaEF = (FrmEF) frm;
                 break;
             case 2:
-                frmModiEF = (FrmModiEF) frm;
+                frmModiEF = (FrmEF) frm;
                 break;
         }
-    }
-
-    private void noEditables() {
-
-        frmModiEF.txtNom.setEditable(false);
-        frmModiEF.txtEmail.setEditable(false);
-        frmModiEF.txtSalariBase.setEditable(false);
-        frmModiEF.btnGuardar.setVisible(false);
-        frmModiEF.btnCancelar.setVisible(false);
-        frmModiEF.DateDataNaixement.setEnabled(false);
-        frmModiEF.DateDatacontratacio.setEnabled(false);
-        frmModiEF.txtSalariBase.setEditable(false);
-        frmModiEF.lblAvatar.setEnabled(false);
     }
 
     public enum Accion {
@@ -112,7 +98,6 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
         _DATA_NAIXEMENT1,
         _LBL_AVATAR1,
         _TXT_EMAIL1,
-        _LBL_AVATAR_DEFAULT,
         // Finestra FrmModi
         _BTN_GUARDAR2,
         _BTN_CANCELAR2,
@@ -165,18 +150,10 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                 });
 
                 String var = empleatMesAnticBLL();
+                
                 if (var != null) {
                     var = "Empleat amb més temps a l'empresa: " + var;
                     frmPagerEF.lblMesAntic.setText(var);
-                }
-
-                if ("user".equals(SingletonUsuari.us2.getTipus())) {
-                    frmPagerEF.btnAfegir.setVisible(false);
-                    frmPagerEF.btnEliminar.setVisible(false);
-                    frmPagerEF.btnModificar.setVisible(true);
-                    frmPagerEF.btnJSON.setVisible(false);
-                    frmPagerEF.btnTXT.setVisible(false);
-                    frmPagerEF.btnXML.setVisible(false);
                 }
 
                 // combo mostrar nombre d'entrades per pàgina
@@ -237,7 +214,7 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                 frmPagerEF.taula.addMouseListener(this);
                 break;
 
-            case 1: // Finestra FrmAltaEF
+            case 1: // Finestra Alta
 
                 frmAltaEF.setTitle("Empleat Fix: AFEGIR");
                 frmAltaEF.setIconImage(imageicono);  // icono de la finestra
@@ -246,7 +223,8 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                 frmAltaEF.setLocationRelativeTo(null);
 
                 avatar_temp = SingletonInici.default_avatar;
-            //SingletonEF.ef.setAvatar(avatar_temp);
+
+                //SingletonEF.ef.setAvatar(avatar_temp);
                 Upload.pintar_imatge(frmAltaEF.lblAvatar, 80, 80, avatar_temp);
 
                 // acció de tancar la finestra
@@ -258,10 +236,6 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
 
                     }
                 });
-
-                frmAltaEF.btnCancelar.setActionCommand("_BTN_CANCELAR1");
-                frmAltaEF.btnCancelar.setName("_BTN_CANCELAR1");
-                frmAltaEF.btnCancelar.addActionListener(this);
 
                 frmAltaEF.btnGuardar.setActionCommand("_BTN_GUARDAR1");
                 frmAltaEF.btnGuardar.setName("_BTN_GUARDAR1");
@@ -297,22 +271,20 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
 
                 frmAltaEF.DateDataNaixement.setName("_DATA_NAIXEMENT1");
                 frmAltaEF.DateDataNaixement.addKeyListener(this);
-                
-                frmAltaEF.lblAvatar.setName("_LBL_AVATAR_DEFAULT");
-                frmAltaEF.lblAvatar.addMouseListener(this);                
-                
+
+                frmAltaEF.lblAvatar.setName("_LBL_AVATAR1");
+                frmAltaEF.lblAvatar.addMouseListener(this);
+
                 break;
 
-            case 2: // Finestra FrmModiEF
+            case 2: // Finestra Modi
 
                 frmModiEF.setTitle("Empleat Fix: MODIFICAR");
                 frmModiEF.setVisible(true);
+                frmModiEF.setIconImage(imageicono);  // icono de la finestra              
                 frmModiEF.setResizable(false);
                 frmModiEF.setLocationRelativeTo(null);
-
-                // icono de la finestra
-                frmModiEF.setIconImage(imageicono);
-
+               
                 // acció de tancar la finestra
                 frmModiEF.addWindowListener(new WindowAdapter() {
                     @Override
@@ -327,15 +299,8 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
 
                 frmModiEF.txtDni.setEditable(false);
 
-                if ("user".equals(SingletonUsuari.us2.getTipus())) {
-                    noEditables();
-                }
                 frmModiEF.lblAvatar.setName("_LBL_AVATAR2");
                 frmModiEF.lblAvatar.addMouseListener(this);
-
-                frmModiEF.btnCancelar.setActionCommand("_BTN_CANCELAR2");
-                frmModiEF.btnCancelar.setName("_BTN_CANCELAR2");
-                frmModiEF.btnCancelar.addActionListener(this);
 
                 frmModiEF.btnGuardar.setActionCommand("_BTN_GUARDAR2");
                 frmModiEF.btnGuardar.setName("_BTN_GUARDAR2");
@@ -416,17 +381,7 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
             case _BTN_TANCAR2:
                 frmModiEF.dispose();
                 new ControladorEF(new FrmPagerEF(), 0).iniciar(0);
-                break;
-            case _LBL_AVATAR2:
-                break;
-
-            case _BTN_CANCELAR1:
-                EFBLL.cancelarEFABLL();
-                break;
-            case _BTN_CANCELAR2:
-                EFBLL.cercarEmpleatFix();
-                EFBLL.omplirCampsMBLL();
-                break;
+                break;            
             case _BTN_GUARDAR1:
                 EFBLL.guardarAEFBLL();
                 if (EFBLL.guardarA()) {
@@ -480,6 +435,7 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
     @Override
     public void mouseClicked(MouseEvent me) {
         int selec;
+        String ruta_avatar;
         switch (Accion.valueOf(me.getComponent().getName())) {
 
             // Finestra FrmPagerEF
@@ -494,20 +450,20 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                 break;
             case _BTN_AFEGIR:
                 if (SingletonEF.efix.isEmpty()) {
-                    new ControladorEF(new FrmAltaEF(), 1).iniciar(1);
+                    new ControladorEF(new FrmEF(), 1).iniciar(1);
                     frmPagerEF.dispose();
                 } else {
                     selec = EFBLL.posicioAbsolutaBLL();
                     if (selec == -1) {
                     } else {
-                        new ControladorEF(new FrmAltaEF(), 1).iniciar(1);
+                        new ControladorEF(new FrmEF(), 1).iniciar(1);
                         frmPagerEF.dispose();
                     }
                 }
                 break;
             case _BTN_MODIFICAR:
                 if (SingletonEF.efix.isEmpty()) {
-                    new ControladorEF(new FrmModiEF(), 2).iniciar(2);
+                    new ControladorEF(new FrmEF(), 2).iniciar(2);
                     frmPagerEF.dispose();
                 } else {
                     selec = EFBLL.posicioAbsolutaBLL();
@@ -515,7 +471,7 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                     } else {
                         String dni = (String) frmPagerEF.taula.getModel().getValueAt(selec, 0);
                         SingletonEF.ef2 = new EmpleatFix(dni);
-                        new ControladorEF(new FrmModiEF(), 2).iniciar(2);
+                        new ControladorEF(new FrmEF(), 2).iniciar(2);
                         frmPagerEF.dispose();
                     }
                 }
@@ -544,13 +500,18 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                     String dni = (String) frmPagerEF.taula.getModel().getValueAt(selec, 0);
                     SingletonEF.ef2 = new EmpleatFix(dni);
                     frmPagerEF.dispose();
-                    new ControladorEF(new FrmModiEF(), 2).iniciar(2);
+                    new ControladorEF(new FrmEF(), 2).iniciar(2);
                 }
                 break;
-            case _LBL_AVATAR_DEFAULT:
-               // String ruta_avatar = (Upload.pintar_guardar_imag(frmAltaEF.lblAvatar, 80, 80,
-                 //       SingletonEF.ef.getAvatar()));
-                //SingletonEF.ef.setAvatar(ruta_avatar);
+            case _LBL_AVATAR2:
+                ruta_avatar = (Upload.pintar_guardar_imag(frmModiEF.lblAvatar, 80, 80,
+                        SingletonEF.ef.getAvatar()));
+                SingletonEF.ef.setAvatar(ruta_avatar);
+                break;
+            case _LBL_AVATAR1:
+                ruta_avatar = (Upload.pintar_guardar_imag(frmAltaEF.lblAvatar, 80, 80,
+                        avatar_temp));
+                avatar_temp = ruta_avatar;
                 break;                
         }
     }
@@ -603,7 +564,6 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                 frmPagerEF.btnEliminar.setIcon(eliminar2);
                 break;
         }
-
     }
 
     @Override
@@ -627,7 +587,6 @@ public class ControladorEF implements ActionListener, KeyListener, MouseListener
                 EFBLL.validarEmailMBLL();
                 break;
         }
-
     }
 
     @Override

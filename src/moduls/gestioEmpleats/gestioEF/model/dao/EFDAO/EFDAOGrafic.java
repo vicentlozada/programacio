@@ -10,17 +10,19 @@ import com.toedter.calendar.JTextFieldDateEditor;
 import javax.swing.JViewport;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import llibreries.Upload;
 import main.Core;
 import moduls.gestioEmpleats.classes.Empleat;
 import static moduls.gestioEmpleats.gestioEF.controlador.ControladorEF.frmAltaEF;
-import static moduls.gestioEmpleats.gestioEF.controlador.ControladorEF.frmPagerEF;
 import static moduls.gestioEmpleats.gestioEF.controlador.ControladorEF.frmModiEF;
+import static moduls.gestioEmpleats.gestioEF.controlador.ControladorEF.frmPagerEF;
 import static moduls.gestioEmpleats.gestioEF.controlador.ControladorEF.frmPagerEF;
 import moduls.gestioEmpleats.gestioEF.model.bll.EFBLL;
 import moduls.gestioEmpleats.gestioEF.model.classes.EmpleatFix;
 import moduls.gestioEmpleats.gestioEF.model.classes.SimpleTableModelEF;
 import moduls.gestioEmpleats.gestioEF.model.classes.SingletonEF;
 import moduls.gestioEmpleats.gestioEF.pager.Pagina;
+import static moduls.gestioInici.model.classes.SingletonInici.avatar_temp;
 import static moduls.gestioInici.model.classes.SingletonInici.buit;
 import static moduls.gestioInici.model.classes.SingletonInici.cancel;
 import static moduls.gestioInici.model.classes.SingletonInici.ok;
@@ -135,7 +137,7 @@ public class EFDAOGrafic {
         }
         return false;
     }
-    
+
     public static boolean demanaSalariMDAO() {
         // Salari Base
         if (frmModiEF.txtSalariBase.getText().isEmpty()) {
@@ -145,11 +147,11 @@ public class EFDAOGrafic {
                 frmModiEF.lblbSalariBase.setIcon(cancel);
             } else {
                 frmModiEF.lblbDni.setIcon(ok);
-                return true;                
+                return true;
             }
         }
         return false;
-    }    
+    }
 
     public static boolean demanaDniEFDAO() {
         if (Validate.isValidFormatDNI(frmAltaEF.txtDni.getText())) {
@@ -170,7 +172,7 @@ public class EFDAOGrafic {
     }
 
     public static void guardarMEFDAO() {
-        SingletonEF.ef = null;
+        String avatar = SingletonEF.ef.getAvatar();
         int difer = 0;
         int antiguitat = 0;
         int edat = 0;
@@ -276,8 +278,6 @@ public class EFDAOGrafic {
                 && (frmModiEF.lblbDnaixement.getIcon().equals(ok))) {
             dni = frmModiEF.txtDni.getText();
 
-            String avatar = "";
-
             if (Menus.confirmar("Guardar les dades?", "Guardar")) {
                 SingletonEF.ef = new EmpleatFix(nom, dni, datanaixement, edat, soubase, sou, login, password, email, tipus, estat, avatar,
                         datacontratacio, antiguitat, percent);
@@ -295,7 +295,7 @@ public class EFDAOGrafic {
         float percent = 0.0f;
         byte estat = 0;
         String login = null, password = null, email = null;
-        String tipus = "user", avatar = "src/images/avatar.png";
+        String tipus = "user", avatar = avatar_temp;
         String nom = "";
         String dni = "";
         Data datanaixement = null;
@@ -427,7 +427,7 @@ public class EFDAOGrafic {
             }
         }
     }
-    
+
     public static int posicioAbsolutaDAOGrafic() {
         int n, selection, inicio, selection1 = 0;
         n = ((SimpleTableModelEF) frmPagerEF.taula.getModel()).getRowCount();
@@ -439,8 +439,8 @@ public class EFDAOGrafic {
             selection1 = -1;
         }
         return selection1;
-    }    
-    
+    }
+
     /**
      * personalitzem l'ample de les columnes
      */
@@ -470,13 +470,11 @@ public class EFDAOGrafic {
                     break;
             }
             columnaTaula.setPreferredWidth(ampleColumna);
-        }        
-    }    
-    
+        }
+    }
+
     /**
-     * ompli els camps en frm modificar
      *
-     * @param ef
      */
     public static void omplirCampsMDAOGrafic() {
         float soubase1 = SingletonEF.ef.getSoubase();
@@ -484,6 +482,7 @@ public class EFDAOGrafic {
         float sou1 = SingletonEF.ef.getSou();
         float sou2 = sou1 * Core.conf.getFactorconv();
 
+        Upload.pintar_imatge(frmModiEF.lblAvatar, 80, 80, SingletonEF.ef.getAvatar());
         frmModiEF.txtDni.setText(SingletonEF.ef.getDni());
         frmModiEF.txtNom.setText(SingletonEF.ef.getNom());
         frmModiEF.txtEmail.setText(SingletonEF.ef.getEmail());
@@ -501,9 +500,7 @@ public class EFDAOGrafic {
         frmModiEF.lblbDcontratacio.setIcon(buit);
         frmModiEF.lblbSalariBase.setIcon(buit);
         frmModiEF.lblbEmail.setIcon(buit);
-    }    
-
-
+    }
 
     public static void cancelarEFADAOGrafic() {
         frmAltaEF.txtNom.setText(null);
@@ -521,5 +518,5 @@ public class EFDAOGrafic {
         frmAltaEF.lblAntiguitat1.setText(null);
         frmAltaEF.lblAntiguitat2.setText(null);
         frmAltaEF.txtDni.requestFocus();
-    }    
+    }
 }

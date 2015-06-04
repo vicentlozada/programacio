@@ -5,6 +5,7 @@
  */
 package moduls.gestioEvents.controlador;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -16,6 +17,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
+import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import llibreries.Upload;
@@ -106,10 +108,10 @@ public class ControladorEvents implements ActionListener, KeyListener, MouseList
 
                 frmPagerEvent.cmbEntradesMostrades.setSelectedItem("" + itemsPerPage);
                 frmPagerEvent.lblContador.setText(String.valueOf(evAL.size()));
-                
+
                 if (!evAL.isEmpty()) {
                     frmPagerEvent.taula.addRowSelectionInterval(0, 0); // seleccionem la primera fila  
-                }                
+                }
 
                 frmPagerEvent.addWindowListener(new WindowAdapter() {
                     @Override
@@ -377,6 +379,19 @@ public class ControladorEvents implements ActionListener, KeyListener, MouseList
                             new ControladorEvents(new FrmPagerEvent(), 0).iniciar(0);
                         }
                     }
+                }
+                break;
+            case _TAULA:
+                frmPagerEvent.taula = (JTable) mc.getSource();
+                Point point = mc.getPoint();
+                int row = frmPagerEvent.taula.rowAtPoint(point);
+                if (mc.getClickCount() == 2) {
+                    selec = GEBLL.posicioAbsolutaBLL();
+                    String valor = (String) frmPagerEvent.taula.getModel().getValueAt(selec, 0);
+                    int idevent = Integer.parseInt(valor);
+                    SingletonEvent.ev = new Event(idevent);
+                    new ControladorEvents(new FrmEvents(), 1).iniciar(2);
+                    frmPagerEvent.dispose();
                 }
                 break;
         }
